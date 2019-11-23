@@ -19,3 +19,7 @@ inputs:
 runs:
   using: 'node12'
   main: 'lib/main.js'
+
+branding:
+  color: 'blue'
+  icon: 'send'
