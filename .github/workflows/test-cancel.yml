@@ -1,4 +1,4 @@
-name: 'Test actions-status-discord action'
+name: 'Test actions'
 on: [push, pull_request]
 
 jobs:
