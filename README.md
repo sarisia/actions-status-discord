@@ -20,7 +20,7 @@ This is a Github Actions action to notify CI status to Discord.
     description: build pages and deploy to github pages!
 ```
 
-![notification](https://user-images.githubusercontent.com/33576079/69472655-332b2880-0df0-11ea-9c33-6add9fca62e9.png)
+<img src="https://user-images.githubusercontent.com/33576079/69472655-332b2880-0df0-11ea-9c33-6add9fca62e9.png" width="50%">
 
 ## Environment Variables
 
