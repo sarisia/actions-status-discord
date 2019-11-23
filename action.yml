@@ -1,0 +1,21 @@
+name: 'Actions Status Discord'
+description: 'Post Github Actions CI status to Discord'
+author: 'Sarisia'
+
+inputs:
+  webhook:
+    description: "Discord webhook endpoint. If not set, env.DISCORD_WEBHOOK will be used."
+  status:
+    description: "Job status. Should be bound to job.status. Default to success."
+    default: 'success'
+  nofail:
+    description: "This action won't make workflow failed by default."
+    default: 'true'
+  job:
+    description: "Job name included in message title"
+  description:
+    description: "Description included in message"
+
+runs:
+  using: 'node12'
+  main: 'lib/main.js'
