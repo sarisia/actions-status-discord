@@ -2,7 +2,7 @@
 
 ## About
 
-This is a Github Actions action to notify CI status to Discord.
+A Github Actions action to notify CI status to Discord.
 
 ## Usage
 

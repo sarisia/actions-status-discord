@@ -1,4 +1,4 @@
-name: 'Test cancel action'
+name: 'Test actions'
 on: [push, pull_request]
 
 jobs:
