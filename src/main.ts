@@ -60,6 +60,7 @@ function getPayload(status: string, description: string, job: string): object {
             title: statusOpts[status].status + (job ? `: ${job}` : ''),
             color: statusOpts[status].color,
             description: description || null,
+            timestamp: (new Date()).toISOString(),
             fields: [
                 {
                     name: 'Repository',

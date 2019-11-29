@@ -1,12 +1,13 @@
 {
   "name": "actions-status-discord",
   "version": "1.0.0",
-  "description": "",
+  "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "release": "npm run build && npm prune --production"
   },
-  "author": "",
+  "author": "Sarisia",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^3.7.2"
