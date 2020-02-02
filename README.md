@@ -1,16 +1,19 @@
 # Actions Status Discord
 
-[![test](https://github.com/sarisia/actions-status-discord/workflows/test/badge.svg)]()
-[![test cancel](https://github.com/sarisia/actions-status-discord/workflows/test%20cancel/badge.svg)]()
+![test](https://github.com/sarisia/actions-status-discord/workflows/test/badge.svg)
+![test cancel](https://github.com/sarisia/actions-status-discord/workflows/test%20cancel/badge.svg)
 
 ## About
 
 A Github Actions action to notify CI status to Discord.
 
+<img src="https://user-images.githubusercontent.com/33576079/69472655-332b2880-0df0-11ea-9c33-6add9fca62e9.png" width="500px">
+
 ## Usage
 
 ```yaml
 - name: Post status to Discord
+  # DO NOT point `@master` branch! It won't work.
   uses: sarisia/actions-status-discord@v1
   # make sure to set this `always()` 
   # or status failure and cancelled won't be notified!
@@ -23,8 +26,6 @@ A Github Actions action to notify CI status to Discord.
     description: build pages and deploy to github pages!
     nofail: false
 ```
-
-<img src="https://user-images.githubusercontent.com/33576079/69472655-332b2880-0df0-11ea-9c33-6add9fca62e9.png" width="500px">
 
 ## Environment Variables
 
