@@ -4,8 +4,9 @@
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
-    "release": "npm run build && npm prune --production"
+    "build": "npx tsc",
+    "release": "npm install && npm run build && npm prune --production",
+    "tag": "git tag -f v1 && git push origin :v1 && git push origin v1"
   },
   "author": "Sarisia",
   "license": "MIT",
