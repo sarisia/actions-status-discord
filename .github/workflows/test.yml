@@ -17,32 +17,53 @@ jobs:
       uses: ./
       if: always()
     - run: sleep 1
-    - name: Test webhook
+
+    - name: Test webhook override
       uses: ./
       if: always()
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK2 }}
     - run: sleep 1
+
     - name: Test job
       uses: ./
       if: always()
       with:
         job: 'Test actions-status-discord action'
     - run: sleep 1
+
     - name: Test description
       uses: ./
       if: always()
       with:
         description: Test description
     - run: sleep 1
+
     - name: Test nofail
       uses: ./
       if: always()
       with:
         status: ''
         nofail: 'false'
+    - run: sleep 1
+
     - name: Test status
       uses: ./
       if: always()
       with:
-        status: ${{ job.status }}    
+        status: ${{ job.status }}
+    - run: sleep 1
+
+    - name: Test color override
+      uses: ./
+      if: always()
+      with:
+        color: 0x0000FF
+    - run: sleep 1
+
+    - name: Test username, avatar override
+      uses: ./
+      if: always()
+      with:
+        username: GitHub Actions
+        avatar_url: ${{ secrets.AVATAR_URL }}
