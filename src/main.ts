@@ -24,6 +24,7 @@ const statusOpts: Record<string, StatusOption> = {
 
 async function run() {
     const nofail: boolean = core.getInput('nofail').trim().toLowerCase() == 'true'
+    const nodetail: boolean = core.getInput('nodetail').trim().toLowerCase() == 'true'
     const webhook: string = core.getInput('webhook') || process.env.DISCORD_WEBHOOK || ''
     if (!webhook) {
         logError('No webhook endpoint is given', nofail)
@@ -36,9 +37,12 @@ async function run() {
     }
     const description: string = core.getInput('description')
     const job: string = core.getInput('job')
+    const color: number = parseInt(core.getInput('color'))
+    const username: string = core.getInput('username')
+    const avatar_url: string = core.getInput('avatar_url')
 
     try {
-        await axios.post(webhook, getPayload(status, description, job))
+        await axios.post(webhook, getPayload(status, description, job, color, username, avatar_url, nodetail))
     } catch (e) {
         logError(e, nofail)
     }
@@ -48,7 +52,15 @@ function logError(msg: string, nofail: boolean): void {
     nofail ? core.error(msg) : core.setFailed(msg)
 }
 
-function getPayload(status: string, description: string, job: string): object {
+function getPayload(
+    status: string,
+    description: string,
+    job: string,
+    color: number,
+    username: string,
+    avatar_url: string,
+    nodetail: boolean
+): Object {
     const ctx = github.context
     const { owner, repo } = ctx.repo
     const { eventName, sha, ref, workflow, actor, payload } = ctx
@@ -80,44 +92,56 @@ function getPayload(status: string, description: string, job: string): object {
         core.debug(`Failed to generate eventDetail: ${error}\n${error.stack}`)
     }
     
-    let embed = {
-        embeds: [{
-            title: statusOpts[status].status + (job ? `: ${job}` : ''),
-            color: statusOpts[status].color,
-            description: description || null,
-            timestamp: (new Date()).toISOString(),
-            fields: [
-                {
-                    name: 'Repository',
-                    value: `[${owner}/${repo}](${repoURL})`,
-                    inline: true
-                },
-                {
-                    name: 'Ref',
-                    value: ref,
-                    inline: true
-                },
-                {
-                    name: eventFieldTitle,
-                    value: eventDetail,
-                    inline: false
-                },
-                {
-                    name: 'Triggered by',
-                    value: actor,
-                    inline: true
-                },
-                {
-                    name: 'Workflow',
-                    value: `[${workflow}](${workflowURL})`,
-                    inline: true
-                }
-            ]
-        }]
+    let embed: {[key: string]: any} = {
+        title: statusOpts[status].status + (job ? `: ${job}` : ''),
+        color: color || statusOpts[status].color,
+        timestamp: (new Date()).toISOString()
+    }
+    if (description) {
+        embed.description = description
+    }
+    if (!nodetail) {
+        embed.fields = [
+            {
+                name: 'Repository',
+                value: `[${owner}/${repo}](${repoURL})`,
+                inline: true
+            },
+            {
+                name: 'Ref',
+                value: ref,
+                inline: true
+            },
+            {
+                name: eventFieldTitle,
+                value: eventDetail,
+                inline: false
+            },
+            {
+                name: 'Triggered by',
+                value: actor,
+                inline: true
+            },
+            {
+                name: 'Workflow',
+                value: `[${workflow}](${workflowURL})`,
+                inline: true
+            }
+        ]
+    }
+
+    let discord_payload: any = {
+        embeds: [embed]
+    }
+    if (username) {
+        discord_payload.username = username
+    }
+    if (avatar_url) {
+        discord_payload.avatar_url = avatar_url
     }
 
     core.debug(`embed: ${JSON.stringify(embed)}`)
-    return embed
+    return discord_payload
 }
 
 run()

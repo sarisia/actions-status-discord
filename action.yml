@@ -5,16 +5,34 @@ author: 'Sarisia'
 inputs:
   webhook:
     description: "Discord webhook endpoint. If not set, env.DISCORD_WEBHOOK will be used."
+    required: false
   status:
     description: "Job status. Should be bound to job.status. Default to success."
+    required: false
     default: 'success'
-  nofail:
-    description: "This action won't make workflow failed by default."
-    default: 'true'
   job:
     description: "Job name included in message title"
+    required: false
   description:
     description: "Description included in message"
+    required: false
+  nofail:
+    description: "This action won't make workflow failed by default."
+    required: false
+    default: 'true'
+  nodetail:
+    description: "Suppress detailed embed fields"
+    required: false
+    default: 'false'
+  color:
+    description: "Overrides Discord embed color"
+    required: false
+  username:
+    description: "Overrides Discord webhook username"
+    required: false
+  avatar_url:
+    description: "Overrides Discord webhook avatar url"
+    required: false
 
 runs:
   using: 'node12'
