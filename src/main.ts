@@ -57,22 +57,29 @@ function getPayload(status: string, description: string, job: string): object {
     
     core.debug(JSON.stringify(payload))
 
-    let eventDetail = eventName
-    switch (eventName) {
-        case "push":
-            if (payload.head_commit) {
-                eventDetail = `Push: [\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) ${payload.head_commit.message}`
-            } else {
-                eventDetail = `Push: \`${sha.substring(0, 7)}\``
-            }
-            break
-        case "pull_request":
-            if (payload.pull_request) {
-                eventDetail = `Pull Request: [\`#${payload.pull_request.number}\`](${payload.pull_request.html_url}) ${payload.pull_request.title}`
-            }
-            break
+    // make event detail field from payload
+    // TODO: move to separated file when this gets bigger
+    const eventFieldTitle = `Event - ${eventName}`
+    let eventDetail = "No information to show"
+    try {
+        switch (eventName) {
+            case "push":
+                if (payload.head_commit) {
+                    eventDetail = `[\`${payload.head_commit.id.substring(0, 7)}\`](${payload.head_commit.url}) ${payload.head_commit.message}`
+                } else {
+                    eventDetail = `SHA: \`${sha.substring(0, 7)}\``
+                }
+                break
+            case "pull_request":
+                if (payload.pull_request) {
+                    eventDetail = `[\`#${payload.pull_request.number}\`](${payload.pull_request.html_url}) ${payload.pull_request.title}`
+                }
+                break
+        }
+    } catch (error) {
+        core.debug(`Failed to generate eventDetail: ${error}\n${error.stack}`)
     }
-
+    
     let embed = {
         embeds: [{
             title: statusOpts[status].status + (job ? `: ${job}` : ''),
@@ -91,7 +98,7 @@ function getPayload(status: string, description: string, job: string): object {
                     inline: true
                 },
                 {
-                    name: 'Event',
+                    name: eventFieldTitle,
                     value: eventDetail,
                     inline: false
                 },
