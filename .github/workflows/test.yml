@@ -54,6 +54,13 @@ jobs:
         status: ${{ job.status }}
     - run: sleep 1
 
+    - name: Test nodetail
+      uses: ./
+      if: always()
+      with:
+        nodetail: true
+    - run: sleep 1
+
     - name: Test color override
       uses: ./
       if: always()
