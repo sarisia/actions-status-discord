@@ -11,20 +11,41 @@ A Github Actions action to notify CI status to Discord.
 
 ## Usage
 
+### Simple
+
 ```yaml
-- name: Post status to Discord
-  # DO NOT point `@master` branch! It won't work.
-  uses: sarisia/actions-status-discord@v1
-  # make sure to set this `always()` 
-  # or status failure and cancelled won't be notified!
+# DO NOT point `@master` branch! It won't work.
+- uses: sarisia/actions-status-discord@v1
+  # set `always()` to get notifications for all statuses (success, failure, cancelled)
   if: always()
   with:
     # provide discord webhook via either inputs or env.DISCORD_WEBHOOK
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
     status: ${{ job.status }}
-    job: deploy to github pages
-    description: build pages and deploy to github pages!
+```
+
+See
+[GitHub Actions Reference](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions)
+to check functions usable in `if` parameter.
+
+### Full options
+
+```yaml
+- name: Post status to Discord
+  uses: sarisia/actions-status-discord@v1
+  env:
+    DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  if: always()
+  with:
+    webhook: ${{ secrets.DISCORD_WEBHOOK }}
+    status: ${{ job.status }}
+    job: Build
+    description: Build and deploy to staging
     nofail: false
+    nodetail: false
+    color: 0x0000FF
+    username: GitHub Actions
+    avatar_url: "https://.../image.png"
 ```
 
 ## Environment Variables
@@ -39,6 +60,10 @@ A Github Actions action to notify CI status to Discord.
 | - | - | - | - | - |
 | webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>You can provide webhook via env either. If both is set, this input will be used.<br>**DO NOT INCLUDE `/github` SUFFIX!** |
 | status | No | `Success`, `Failure` or `Cancelled` | `Success` | Set to `${{ job.status }}` is recommended. |
+| job | No | String | | Job name included in message title. See example above. |
 | description | No | String | | Description included in message. See example above. |
-| job | no | String | | Job name included in message title. See example above. |
-| nofail | no | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
+| nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
+| nodetail | No | `true` or `false` | `false` | Set `true` to suppress detailed embed fields. |
+| color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color. |
+| username | No | String | | Overrides Discord webhook username. |
+| avatar_url | No | String | | Overrides Discord webhook avatar url. |
