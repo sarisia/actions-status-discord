@@ -44,8 +44,13 @@ async function run() {
     try {
         await axios.post(webhook, getPayload(status, description, job, color, username, avatar_url, nodetail))
     } catch (e) {
+        logError("Failed to execute webhook:", nofail)
+        if (e.response) {
+            logError(`${e.response.status}: ${JSON.stringify(e.response.data)}`, nofail)
+        } else {
         logError(e, nofail)
     }
+}
 }
 
 function logError(msg: string, nofail: boolean): void {
