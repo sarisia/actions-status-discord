@@ -25,6 +25,20 @@ jobs:
         webhook: ${{ secrets.DISCORD_WEBHOOK2 }}
     - run: sleep 1
 
+    - name: Test invalid webhook
+      uses: ./
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK_INVALID }}
+    - run: sleep 1
+
+    - name: Test invalid webhook endpoint
+      uses: ./
+      if: always()
+      with:
+        webhook: "https://invalid.sarisia"
+    - run: sleep 1
+
     - name: Test job
       uses: ./
       if: always()
@@ -37,14 +51,6 @@ jobs:
       if: always()
       with:
         description: Test description
-    - run: sleep 1
-
-    - name: Test nofail
-      uses: ./
-      if: always()
-      with:
-        status: ''
-        nofail: 'false'
     - run: sleep 1
 
     - name: Test status
@@ -61,6 +67,13 @@ jobs:
         nodetail: true
     - run: sleep 1
 
+    - name: Test nodetail title
+      uses: ./
+      with:
+        nodetail: true
+        job: "title test"
+    - run: sleep 1
+
     - name: Test color override
       uses: ./
       if: always()
@@ -74,3 +87,12 @@ jobs:
       with:
         username: GitHub Actions
         avatar_url: ${{ secrets.AVATAR_URL }}
+    - run: sleep 1
+
+    - name: Test nofail
+      uses: ./
+      if: always()
+      with:
+        status: ''
+        nofail: 'false'
+    - run: sleep 1
