@@ -7,7 +7,7 @@
 
 A Github Actions action to notify CI status to Discord.
 
-<img src="https://user-images.githubusercontent.com/33576079/69472655-332b2880-0df0-11ea-9c33-6add9fca62e9.png" width="500px">
+<img width="478" alt="Screen Shot 2020-04-28 at 6 46 57" src="https://user-images.githubusercontent.com/33576079/80424271-55cfe900-891c-11ea-8c18-4cdcb1ce1ecf.png">
 
 ## Usage
 
