@@ -48,9 +48,9 @@ async function run() {
         if (e.response) {
             logError(`${e.response.status}: ${JSON.stringify(e.response.data)}`, nofail)
         } else {
-        logError(e, nofail)
+            logError(e, nofail)
+        }
     }
-}
 }
 
 function logError(msg: string, nofail: boolean): void {
@@ -98,14 +98,17 @@ function getPayload(
     }
     
     let embed: {[key: string]: any} = {
-        title: statusOpts[status].status + (job ? `: ${job}` : ''),
         color: color || statusOpts[status].color,
         timestamp: (new Date()).toISOString()
+    }
+    if (job) {
+        embed.title = job
     }
     if (description) {
         embed.description = description
     }
     if (!nodetail) {
+        embed.title = statusOpts[status].status + (embed.title ? `: ${embed.title}` : '')
         embed.fields = [
             {
                 name: 'Repository',
