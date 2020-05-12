@@ -1,0 +1,33 @@
+name: "test releases/v1"
+on:
+  push:
+    branches:
+      - 'releases/v1'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+    steps:
+      - name: test simple
+        uses: sarisia/actions-status-discord@releases/v1
+        with:
+          status: ${{ job.status }}
+      - name: test full
+        uses: sarisia/actions-status-discord@releases/v1
+        with:
+          status: Failure
+          job: Test release branch
+          description: "testing `releases/v1` branch"
+          nofail: false
+          nodetail: false
+          color: 0xFFFFFF
+          username: GitHub Actions
+      - name: test nodetail
+        uses: sarisia/actions-status-discord@releases/v1
+        with:
+          status: Cancelled
+          job: test nodetail
+          nodetail: true
+          
