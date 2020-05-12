@@ -58,7 +58,7 @@ to check functions usable in `if` parameter.
 
 | Key | Required | Value | Default | Description |
 | - | - | - | - | - |
-| webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>You can provide webhook via env either. If both is set, this input will be used.<br>**DO NOT INCLUDE `/github` SUFFIX!** |
+| webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>You can provide webhook via env either. If both is set, this input will be used.<br>**DO NOT APPEND `/github` SUFFIX!** |
 | status | No | `Success`, `Failure` or `Cancelled` | `Success` | Set to `${{ job.status }}` is recommended. |
 | job | No | String | | Job name included in message title. See example above. |
 | description | No | String | | Description included in message. See example above. |
@@ -67,3 +67,27 @@ to check functions usable in `if` parameter.
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color. |
 | username | No | String | | Overrides Discord webhook username. |
 | avatar_url | No | String | | Overrides Discord webhook avatar url. |
+
+## Tips
+
+### Trigger multiple webhooks
+
+You can set multiple webhooks separated with EOL (line break, `\n`) to Secrets.
+
+For example, set Secrets to:
+```
+https://discordapp.com/api/webhooks/...
+https://media.guilded.gg/weabhooks/...
+https://this-is-invalid-webhook-endpoint.invalid/...
+```
+will trigger these 3 webhooks simultaneously.
+
+If some of these webhooks are failed, other deliveries will **NOT** be cancelled.
+
+If the option `nofail` is set to `false`, any one of fail will set
+workflow status to `failed`.
+
+### Guilded webhook support
+
+As [Guilded](https://guilded.gg) supports [Discord Webhooks API](https://discord.com/developers/docs/resources/webhook#execute-webhook),
+you can use Guilded webhook endpoint in the same way as Discord webhook.
