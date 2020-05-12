@@ -26,10 +26,14 @@ async function run() {
     const nofail: boolean = core.getInput('nofail').trim().toLowerCase() == 'true'
     const nodetail: boolean = core.getInput('nodetail').trim().toLowerCase() == 'true'
     const webhook: string = core.getInput('webhook') || process.env.DISCORD_WEBHOOK || ''
-    if (!webhook) {
+    const webhooks: string[] = webhook.trim().split("\n")
+    if (!webhooks.length) {
         logError('No webhook endpoint is given', nofail)
         process.exit()
     }
+    // set each webhook endpoint as secret to avoid accidentaly leak
+    webhooks.forEach(w => core.setSecret(w))
+
     const status: string = core.getInput('status').toLowerCase()
     if (!(status in statusOpts)) {
         logError('Invalid status value', nofail)
@@ -41,16 +45,22 @@ async function run() {
     const username: string = core.getInput('username')
     const avatar_url: string = core.getInput('avatar_url')
 
-    try {
-        await axios.post(webhook, getPayload(status, description, job, color, username, avatar_url, nodetail))
-    } catch (e) {
-        logError("Failed to execute webhook:", nofail)
-        if (e.response) {
-            logError(`${e.response.status}: ${JSON.stringify(e.response.data)}`, nofail)
-        } else {
-            logError(e, nofail)
+    const payload = getPayload(status, description, job, color, username, avatar_url, nodetail)
+    await Promise.all(webhooks.map(w => wrapWebhook(w.trim(), payload, nofail)))
+}
+
+function wrapWebhook(webhook: string, payload: Object, nofail: boolean): Promise<void> {
+    return async function() {
+        try {
+            await axios.post(webhook, payload)
+        } catch(e) {
+            if (e.response) {
+                logError(`${e.response.status}: ${JSON.stringify(e.response.data)}`, nofail)
+            } else {
+                logError(e, nofail)
+            }
         }
-    }
+    }()
 }
 
 function logError(msg: string, nofail: boolean): void {
