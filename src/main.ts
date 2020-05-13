@@ -41,7 +41,7 @@ export function getPayload(inputs: Inputs): Object {
     const eventDetail = formatEvent(eventName, payload, sha)
     
     let embed: {[key: string]: any} = {
-        color: inputs.color || statusOpts[status].color,
+        color: inputs.color || statusOpts[inputs.status].color,
         timestamp: (new Date()).toISOString()
     }
     if (inputs.job) {
@@ -51,7 +51,7 @@ export function getPayload(inputs: Inputs): Object {
         embed.description = inputs.description
     }
     if (!inputs.nodetail) {
-        embed.title = statusOpts[status].status + (embed.title ? `: ${embed.title}` : '')
+        embed.title = statusOpts[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
         embed.fields = [
             {
                 name: 'Repository',

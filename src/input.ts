@@ -48,8 +48,8 @@ export function getInputs(): Inputs {
     if (!inputs.webhooks.length) {
         throw new Error("no webhook is given")
     }
-    if (!(status in statusOpts)) {
-        throw new Error(`invalid status value: ${status}`)
+    if (!(inputs.status in statusOpts)) {
+        throw new Error(`invalid status value: ${inputs.status}`)
     }
 
     return inputs
