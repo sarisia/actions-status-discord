@@ -1,6 +1,8 @@
 name: "run"
 on:
   push:
+    branches-ignore:
+      - 'releases/**'
   pull_request:
 
 jobs:

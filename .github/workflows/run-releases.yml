@@ -1,8 +1,8 @@
-name: "run releases/v1"
+name: "run releases"
 on:
   push:
     branches:
-      - 'releases/v1'
+      - 'releases/**'
 
 jobs:
   run:

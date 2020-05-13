@@ -12,12 +12,9 @@ export function formatEvent(event: string, payload: Object): string {
     let msg: string = "No further information"
     if (event in formatters) {
         try {
-            const fmtmsg = formatters[event](payload)
-            if (fmtmsg) {
-                msg += ("\n" + fmtmsg)
-            }
+            return formatters[event](payload) || msg
         } catch(e) {
-            logInfo(`Failed to generate eventDetail: ${e}\n${e.stack}`)
+            logInfo(`Failed to generate eventDetail for ${event}: ${e}\n${e.stack}`)
         }
     }
 
