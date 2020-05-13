@@ -1,4 +1,4 @@
-export default {
+{
     "after": "edccba2549a0a9a8545acfd4694f96481ddb16ca",
     "base_ref": null,
     "before": "8c434c42c3fc8f17d30de311c8f647af339ba231",

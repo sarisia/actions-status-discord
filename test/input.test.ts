@@ -1,4 +1,4 @@
-import { getInputs, Inputs } from '../src/input'
+import { getInputs } from '../src/input'
 
 describe("getInputs()", () => {
     beforeEach(() => {
@@ -55,5 +55,4 @@ describe("getInputs()", () => {
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
     })
-
 })

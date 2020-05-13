@@ -1,7 +1,7 @@
-import { formatEvent } from '../../src/format'
-import pull_request from './payload/pull_request'
-import push_branch from './payload/push_branch'
-import push_tag from './payload/push_tag'
+import { formatEvent } from '../src/format'
+import pull_request from './payload/pull_request.json'
+import push_branch from './payload/push_branch.json'
+import push_tag from './payload/push_tag.json'
 
 describe('formatEvent(event, payload)', () => {
     test('no formatter', () => {
