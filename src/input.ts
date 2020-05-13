@@ -32,10 +32,14 @@ export const statusOpts: Record<string, StatusOption> = {
 }
 
 export function getInputs(): Inputs {
-    const webhook: string = core.getInput('nodetail').trim() || process.env.DISCORD_WEBHOOK || ''
+    const webhook: string = core.getInput('webhook').trim() || process.env.DISCORD_WEBHOOK || ''
+    const webhooks: string[] = webhook.split('\n')
+    // prevent webhooks from leak
+    webhooks.forEach(w => core.setSecret(w))
+
     const inputs: Inputs =  {
         nodetail: core.getInput('nodetail').trim().toLowerCase() === 'true',
-        webhooks: webhook.split('\n'),
+        webhooks: webhooks,
         status: core.getInput('status').trim().toLowerCase(),
         description: core.getInput('description').trim(),
         job: core.getInput('job').trim(),
