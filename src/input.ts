@@ -33,7 +33,7 @@ export const statusOpts: Record<string, StatusOption> = {
 
 export function getInputs(): Inputs {
     const webhook: string = core.getInput('webhook').trim() || process.env.DISCORD_WEBHOOK || ''
-    const webhooks: string[] = webhook.split('\n')
+    const webhooks: string[] = webhook.split('\n').filter(x => x || false)
     // prevent webhooks from leak
     webhooks.forEach(w => core.setSecret(w))
 
