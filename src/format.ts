@@ -7,9 +7,9 @@ const formatters: Record<string, Formatter> = {
     pull_request: pullRequestFormatter
 }
 
-export function formatEvent(event: string, payload: Object, sha: string): string {
+export function formatEvent(event: string, payload: Object): string {
     logInfo(JSON.stringify(payload, null, 2))
-    let msg: string = `SHA \`${sha}\``
+    let msg: string = "No further information"
     if (event in formatters) {
         try {
             const fmtmsg = formatters[event](payload)

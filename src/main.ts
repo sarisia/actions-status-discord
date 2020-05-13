@@ -38,7 +38,7 @@ export function getPayload(inputs: Inputs): Object {
     logInfo(JSON.stringify(payload))
 
     const eventFieldTitle = `Event - ${eventName}`
-    const eventDetail = formatEvent(eventName, payload, sha)
+    const eventDetail = formatEvent(eventName, payload)
     
     let embed: {[key: string]: any} = {
         color: inputs.color || statusOpts[inputs.status].color,
