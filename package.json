@@ -4,13 +4,16 @@
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
+    "test": "jest",
     "build": "npx tsc",
-    "release": "npm install && npm run build && npm prune --production",
-    "tag": "git tag -f v1 && git push origin :v1 && git push origin v1"
+    "release": "npm install && npm run build && npm prune --production"
   },
   "author": "Sarisia",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^26.0.1",
+    "ts-jest": "^25.5.1",
     "typescript": "^3.7.2"
   },
   "dependencies": {
