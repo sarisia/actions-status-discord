@@ -1,0 +1,25 @@
+name: "run"
+on:
+  push:
+  pull_request:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: build
+        run: |
+          npm ci
+          npm run build
+      - name: test
+        uses: ./
+        with:
+          status: ${{ job.status }}
+          job: run
+          nofail: false
