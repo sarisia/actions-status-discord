@@ -1,4 +1,14 @@
+# misc
 .DS_Store
 
-node_modules
-lib
+# master
+/node_modules
+/lib
+
+# # release
+# /*
+# !/.gitignore
+# !/action.yml
+# !/.github
+# !/lib
+# !/node_modules
