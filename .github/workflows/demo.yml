@@ -1,0 +1,41 @@
+name: demo
+on:
+  push:
+    branches:
+      - 'demo*'
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          npm ci
+          npm run build
+      - name: minimum
+        uses: ./
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          status: ${{ job.status }}
+      - name: full options
+        uses: ./
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          job: "deploy"
+          description: "Build and deploy to GitHub Pages"
+          nofail: false
+          nodetail: false
+          color: 0x0000ff
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}
+      - name: no detail
+        uses: ./
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
+          job: "We did it!"
