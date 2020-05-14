@@ -17,14 +17,14 @@ jobs:
         uses: ./
         if: always()
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEMO }}
         with:
           status: ${{ job.status }}
       - name: full options
         uses: ./
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_DEMO }}
           status: ${{ job.status }}
           job: "deploy"
           description: "Build and deploy to GitHub Pages"
@@ -36,6 +36,7 @@ jobs:
       - name: no detail
         uses: ./
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_DEMO }}
           nodetail: true
           job: "We did it!"
+          color: 0xff91a4
