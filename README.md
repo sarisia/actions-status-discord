@@ -1,5 +1,6 @@
 # Actions Status Discord
 
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=sarisia/actions-status-discord)](https://dependabot.com)
 ![test](https://github.com/sarisia/actions-status-discord/workflows/test/badge.svg)
 ![run](https://github.com/sarisia/actions-status-discord/workflows/run/badge.svg)
 ![run releases](https://github.com/sarisia/actions-status-discord/workflows/run%20releases/badge.svg)
