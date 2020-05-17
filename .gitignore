@@ -1,2 +1,14 @@
-# node_modules
-# lib
+# misc
+.DS_Store
+
+# master
+/node_modules
+/lib
+
+# # release
+# /*
+# !/.gitignore
+# !/action.yml
+# !/.github
+# !/lib
+# !/node_modules
