@@ -7,6 +7,16 @@
 
 A Github Actions action to notify CI status to Discord.
 
+---
+
+* [Usage](#usage)
+* [Environment Variables](#environment-variables)
+* [Inputs](#inputs)
+* [Tips](#tips)
+<!-- * [Migrate to v2](#migrate-to-v2) -->
+
+---
+
 ## Usage
 
 ### Minimum
@@ -30,7 +40,7 @@ A Github Actions action to notify CI status to Discord.
   with:
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
     status: ${{ job.status }}
-    job: "deploy"
+    title: "deploy"
     description: "Build and deploy to GitHub Pages"
     nofail: false
     nodetail: false
@@ -48,7 +58,7 @@ A Github Actions action to notify CI status to Discord.
   with:
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
     nodetail: true
-    job: "We did it!"
+    title: "We did it!"
 ```
 
 <img width="296" alt="Screen Shot 2020-05-14 at 11 43 28" src="https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png">
@@ -68,13 +78,22 @@ For `if` parameter, see
 | - | - | - | - | - |
 | webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>This overrides `env.DISCORD_WEBHOOK`.<br>**DO NOT APPEND [`/github` SUFFIX](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)!** |
 | status | No | `Success`, `Failure` or `Cancelled` | `Success` | Set to `${{ job.status }}` is recommended.<br>See [Document for `job` context](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-context) |
-| job | No | String | | Job name included in message title |
+| job | No | String | | **Deprecated. Will be removed in v2**<br>Job name included in message title. Same as `title` input. |
+| title | No | String | | String included in embed title. Overrides `job` input. |
 | description | No | String | | Description included in message |
 | nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
 | nodetail | No | `true` or `false` | `false` | Set `true` to suppress detailed fields |
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color |
 | username | No | String | | Overrides Discord webhook username |
 | avatar_url | No | String | | Overrides Discord webhook avatar url |
+
+<!-- ## Migrate to v2
+
+### input `job` is now `title`
+
+`job` input is deprecated and now removed in v2.
+
+Just change `job` to `title` in your workflow file to make it work. -->
 
 ## Tips
 
