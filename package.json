@@ -20,6 +20,6 @@
     "@actions/core": "^1.2.4",
     "@actions/github": "^1.1.0",
     "@types/node": "^13.13.5",
-    "axios": "^0.19.0"
+    "axios": "^0.19.2"
   }
 }
