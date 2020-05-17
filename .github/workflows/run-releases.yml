@@ -18,7 +18,7 @@ jobs:
         uses: sarisia/actions-status-discord@releases/v1
         with:
           status: Failure
-          job: Test release branch
+          title: Test release branch
           description: "testing `releases/v1` branch"
           nofail: false
           nodetail: false
@@ -29,6 +29,6 @@ jobs:
         uses: sarisia/actions-status-discord@releases/v1
         with:
           status: Cancelled
-          job: test nodetail
+          title: test nodetail
           nodetail: true
           nofail: false

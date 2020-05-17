@@ -26,7 +26,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_DEMO }}
           status: ${{ job.status }}
-          job: "deploy"
+          title: "deploy"
           description: "Build and deploy to GitHub Pages"
           nofail: false
           nodetail: false
@@ -38,5 +38,5 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_DEMO }}
           nodetail: true
-          job: "We did it!"
+          title: "We did it!"
           color: 0xff91a4
