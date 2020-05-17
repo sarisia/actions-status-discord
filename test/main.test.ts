@@ -7,7 +7,7 @@ const base: Inputs = {
     webhooks: ['https://webhook.invalid'],
     status: 'success',
     description: '',
-    job: '',
+    title: '',
     color: NaN,
     username: '',
     avatar_url: ''
@@ -42,7 +42,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: '',
+            title: '',
             color: NaN,
             username: '',
             avatar_url: ''
@@ -90,7 +90,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: '',
+            title: '',
             color: NaN,
             username: '',
             avatar_url: ''
@@ -110,7 +110,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: 'nodetail title',
+            title: 'nodetail title',
             color: NaN,
             username: '',
             avatar_url: ''
@@ -131,7 +131,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: 'description test',
-            job: '',
+            title: '',
             color: NaN,
             username: '',
             avatar_url: ''
@@ -180,7 +180,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: 'job test',
+            title: 'job test',
             color: NaN,
             username: '',
             avatar_url: ''
@@ -228,7 +228,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: '',
+            title: '',
             color: 0xfff000,
             username: '',
             avatar_url: ''
@@ -276,7 +276,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: '',
+            title: '',
             color: NaN,
             username: 'username test',
             avatar_url: ''
@@ -325,7 +325,7 @@ describe('getPayload(Inputs)', () => {
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
-            job: '',
+            title: '',
             color: NaN,
             username: '',
             avatar_url: 'https://avatar.invalid/avatar.png'

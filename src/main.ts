@@ -44,8 +44,8 @@ export function getPayload(inputs: Inputs): Object {
         color: inputs.color || statusOpts[inputs.status].color,
         timestamp: (new Date()).toISOString()
     }
-    if (inputs.job) {
-        embed.title = inputs.job
+    if (inputs.title) {
+        embed.title = inputs.title
     }
     if (inputs.description) {
         embed.description = inputs.description

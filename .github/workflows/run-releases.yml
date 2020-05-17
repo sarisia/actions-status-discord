@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - 'releases/**'
+    tags:
+      - 'v*'
 
 jobs:
   run:
@@ -10,15 +12,16 @@ jobs:
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
+      - uses: actions/checkout@v2
       - name: test simple
-        uses: sarisia/actions-status-discord@releases/v1
+        uses: ./
         with:
           status: ${{ job.status }}
       - name: test full
-        uses: sarisia/actions-status-discord@releases/v1
+        uses: ./
         with:
           status: Failure
-          job: Test release branch
+          title: Test release branch
           description: "testing `releases/v1` branch"
           nofail: false
           nodetail: false
@@ -26,9 +29,9 @@ jobs:
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
       - name: test nodetail
-        uses: sarisia/actions-status-discord@releases/v1
+        uses: ./
         with:
           status: Cancelled
-          job: test nodetail
+          title: test nodetail
           nodetail: true
           nofail: false

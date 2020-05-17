@@ -23,5 +23,5 @@ jobs:
         uses: ./
         with:
           status: ${{ job.status }}
-          job: run
+          title: run
           nofail: false

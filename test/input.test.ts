@@ -2,6 +2,17 @@ import { getInputs } from '../src/input'
 
 describe("getInputs()", () => {
     beforeEach(() => {
+        // do we have more convenient way?
+        delete process.env['INPUT_NODETAIL']
+        delete process.env['INPUT_WEBHOOK']
+        delete process.env['INPUT_STATUS']
+        delete process.env['INPUT_DESCRIPTION']
+        delete process.env['INPUT_JOB']
+        delete process.env['INPUT_TITLE']
+        delete process.env['INPUT_COLOR']
+        delete process.env['INPUT_USERNAME']
+        delete process.env['INPUT_AVATAR_URL']
+
         // see action.yml for default values
         process.env['INPUT_STATUS'] = 'success'
         process.env['INPUT_NOFAIL'] = 'true'
@@ -16,7 +27,7 @@ describe("getInputs()", () => {
         expect(got.webhooks).toStrictEqual(["https://env.webhook.invalid"])
         expect(got.status).toBe('success')
         expect(got.description).toBe('')
-        expect(got.job).toBe('')
+        expect(got.title).toBe('')
         expect(got.color).toBeFalsy()
         expect(got.username).toBe('')
         expect(got.avatar_url).toBe('')
@@ -32,7 +43,15 @@ describe("getInputs()", () => {
         expect(getInputs).toThrow('invalid status value: invalid')
     })
 
-    test("all", () => {
+    test("override job by title", () => {
+        process.env['INPUT_JOB'] = 'job'
+        process.env['INPUT_TITLE'] = 'title'
+
+        const got = getInputs()
+        expect(got.title).toBe('title')
+    })
+
+    test("all (job)", () => {
         process.env['INPUT_NODETAIL'] = 'true'
         process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
         process.env['INPUT_STATUS'] = 'Cancelled'
@@ -50,7 +69,31 @@ describe("getInputs()", () => {
         ])
         expect(got.status).toBe('cancelled')
         expect(got.description).toBe('description text')
-        expect(got.job).toBe('job text')
+        expect(got.title).toBe('job text')
+        expect(got.color).toBe(0xffffff)
+        expect(got.username).toBe('jest test')
+        expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
+    })
+
+    test("all (title)", () => {
+        process.env['INPUT_NODETAIL'] = 'true'
+        process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
+        process.env['INPUT_STATUS'] = 'Cancelled'
+        process.env['INPUT_DESCRIPTION'] = 'description text'
+        process.env['INPUT_TITLE'] = 'job text\n\n\n\n\n'
+        process.env['INPUT_COLOR'] = '0xffffff'
+        process.env['INPUT_USERNAME'] = 'jest test'
+        process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
+
+        const got = getInputs()
+        expect(got.nodetail).toBe(true)
+        expect(got.webhooks).toStrictEqual([
+            'https://input.webhook.invalid',
+            'https://input2.webhook.invalid'
+        ])
+        expect(got.status).toBe('cancelled')
+        expect(got.description).toBe('description text')
+        expect(got.title).toBe('job text')
         expect(got.color).toBe(0xffffff)
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')

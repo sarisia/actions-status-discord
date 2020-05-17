@@ -1,6 +1,6 @@
 {
   "name": "actions-status-discord",
-  "version": "1.0.0",
+  "version": "1.4.1",
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
@@ -11,15 +11,15 @@
   "author": "Sarisia",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^25.2.2",
     "jest": "<26.0.0",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.9.2"
   },
   "dependencies": {
-    "@actions/core": "^1.2.0",
-    "@actions/github": "^1.1.0",
-    "@types/node": "^13.13.5",
-    "axios": "^0.19.0"
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^2.2.0",
+    "@types/node": "^14.0.1",
+    "axios": "^0.19.2"
   }
 }
