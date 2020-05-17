@@ -2,8 +2,8 @@
 .DS_Store
 
 # master
-/node_modules
-/lib
+# /node_modules
+# /lib
 
 # # release
 # /*
