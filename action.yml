@@ -11,7 +11,10 @@ inputs:
     required: false
     default: 'success'
   job:
-    description: "Job name included in message title"
+    description: "Deprecated. Job name included in message title. Same as title input."
+    required: false
+  title:
+    description: "String included in embed title. Overrides job input."
     required: false
   description:
     description: "Description included in message"
