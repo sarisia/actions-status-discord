@@ -6,20 +6,21 @@
   "scripts": {
     "test": "jest --verbose --ci",
     "build": "npx tsc",
+    "version": "npm run release && git add .",
     "release": "npm install && npm run build && npm prune --production"
   },
   "author": "Sarisia",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^25.2.2",
+    "@types/jest": "^25.2.3",
     "jest": "<26.0.0",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.3"
   },
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^2.2.0",
-    "@types/node": "^14.0.1",
+    "@types/node": "^14.0.4",
     "axios": "^0.19.2"
   }
 }
