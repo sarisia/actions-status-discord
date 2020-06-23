@@ -1,8 +1,9 @@
 import * as github from '@actions/github'
 import axios from 'axios'
+import { formatEvent } from './format'
 import { getInputs, Inputs, statusOpts } from './input'
 import { logError, logInfo } from './utils'
-import { formatEvent } from './format'
+import { fitEmbed } from './validate'
 
 async function run() {
     try {
@@ -34,12 +35,12 @@ export function getPayload(inputs: Inputs): Object {
     const { eventName, sha, ref, workflow, actor, payload } = ctx
     const repoURL = `https://github.com/${owner}/${repo}`
     const workflowURL = `${repoURL}/commit/${sha}/checks`
-    
+
     logInfo(JSON.stringify(payload))
 
     const eventFieldTitle = `Event - ${eventName}`
     const eventDetail = formatEvent(eventName, payload)
-    
+
     let embed: {[key: string]: any} = {
         color: inputs.color || statusOpts[inputs.status].color,
         timestamp: (new Date()).toISOString()
@@ -82,8 +83,10 @@ export function getPayload(inputs: Inputs): Object {
     }
 
     let discord_payload: any = {
-        embeds: [embed]
+        embeds: [fitEmbed(embed)]
     }
+    logInfo(`embed: ${JSON.stringify(embed)}`)
+
     if (inputs.username) {
         discord_payload.username = inputs.username
     }
@@ -91,7 +94,6 @@ export function getPayload(inputs: Inputs): Object {
         discord_payload.avatar_url = inputs.avatar_url
     }
 
-    logInfo(`embed: ${JSON.stringify(embed)}`)
     return discord_payload
 }
 
