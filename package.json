@@ -4,7 +4,7 @@
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
-    "test": "jest --verbose --ci",
+    "test": "jest --verbose --ci --detectOpenHandles",
     "build": "npx tsc",
     "release": "npm install && npm run build && npm prune --production"
   },
