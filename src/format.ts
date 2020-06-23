@@ -4,7 +4,8 @@ type Formatter = (payload: any) => string
 
 const formatters: Record<string, Formatter> = {
     push: pushFormatter,
-    pull_request: pullRequestFormatter
+    pull_request: pullRequestFormatter,
+    release: releaseFormatter,
 }
 
 export function formatEvent(event: string, payload: Object): string {
@@ -27,4 +28,10 @@ function pushFormatter(payload: any): string {
 
 function pullRequestFormatter(payload: any): string {
     return `[\`#${payload.pull_request.number}\`](${payload.pull_request.html_url}) ${payload.pull_request.title}`
+}
+
+function releaseFormatter(payload: any): string {
+    const { name, body } = payload.release
+    const nameText = name ? `**${name}**` : ''
+    return `${nameText}${(nameText && body) ? "\n" : ""}${body || ""}`
 }
