@@ -1,17 +1,6 @@
+import { formatEvent } from '../src/format'
 import { Inputs } from '../src/input'
 import { getPayload } from '../src/main'
-import { formatEvent } from '../src/format'
-
-const base: Inputs = {
-    nodetail: false,
-    webhooks: ['https://webhook.invalid'],
-    status: 'success',
-    description: '',
-    title: '',
-    color: NaN,
-    username: '',
-    avatar_url: ''
-}
 
 jest.mock('@actions/github', () => {
     return {

@@ -3,8 +3,8 @@ import pull_request from './payload/pull_request.json'
 import push_branch from './payload/push_branch.json'
 import push_tag from './payload/push_tag.json'
 import release from './payload/release/release.json'
-import release_noname from './payload/release/release_noname.json'
 import release_nobody from './payload/release/release_nobody.json'
+import release_noname from './payload/release/release_noname.json'
 import release_noname_nobody from './payload/release/release_noname_nobody.json'
 
 describe('formatEvent(event, payload)', () => {
