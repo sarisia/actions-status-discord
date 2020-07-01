@@ -14,7 +14,7 @@
     "@types/jest": "^26.0.3",
     "jest": "<26.0.0",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "dependencies": {
     "@actions/core": "^1.2.4",
