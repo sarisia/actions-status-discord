@@ -19,7 +19,7 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0",
-    "@types/node": "^14.0.20",
+    "@types/node": "^14.0.21",
     "axios": "^0.19.2"
   }
 }
