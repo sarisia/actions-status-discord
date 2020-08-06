@@ -14,20 +14,24 @@ export interface Inputs {
 interface StatusOption {
     status: string
     color: number
+    avatar_url: string
 }
 
 export const statusOpts: Record<string, StatusOption> = {
     success: {
         status: 'Success',
-        color: 0x28A745
+        color: 0x28A745,
+        avatar_url: "https://cdn.discordapp.com/attachments/408617266197037058/740894482433703946/success.png"
     },
     failure: {
         status: 'Failure',
-        color: 0xCB2431
+        color: 0xCB2431,
+        avatar_url: "https://cdn.discordapp.com/attachments/408617266197037058/740894501173854208/failure.png"
     },
     cancelled: {
         status: 'Cancelled',
-        color: 0xDBAB09
+        color: 0xDBAB09,
+        avatar_url: "https://cdn.discordapp.com/attachments/408617266197037058/740894521121833010/cancelled.png"
     }
 }
 
