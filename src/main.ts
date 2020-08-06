@@ -88,10 +88,10 @@ export function getPayload(inputs: Inputs): Object {
     logInfo(`embed: ${JSON.stringify(embed)}`)
 
     if (inputs.username) {
-        discord_payload.username = inputs.username
+        discord_payload.username = statusOpts[inputs.status].avatar_url
     }
     if (inputs.avatar_url) {
-        discord_payload.avatar_url = inputs.avatar_url
+        discord_payload.avatar_url = statusOpts[inputs.status].avatar_url
     }
 
     return discord_payload
