@@ -1,4 +1,4 @@
-name: "run releases"
+name: "test-run release branch"
 on:
   push:
     branches:
@@ -21,7 +21,7 @@ jobs:
         uses: ./
         with:
           status: Failure
-          title: Test release branch
+          title: "${{ github.workflow }} - must failure"
           description: "testing `releases/v1` branch"
           nofail: false
           nodetail: false
@@ -32,6 +32,6 @@ jobs:
         uses: ./
         with:
           status: Cancelled
-          title: test nodetail
+          title: "${{ github.workflow }} - no details"
           nodetail: true
           nofail: false

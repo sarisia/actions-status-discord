@@ -13,3 +13,7 @@ export function logInfo(msg: string) {
 export function logWarning(msg: string) {
     core.warning(msg)
 }
+
+export function stob(s: string): boolean {
+    return s.trim().toLowerCase() === 'true'
+}

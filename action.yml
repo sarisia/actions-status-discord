@@ -19,14 +19,6 @@ inputs:
   description:
     description: "Description included in message"
     required: false
-  nofail:
-    description: "This action won't make workflow failed by default."
-    required: false
-    default: 'true'
-  nodetail:
-    description: "Suppress detailed embed fields"
-    required: false
-    default: 'false'
   color:
     description: "Overrides Discord embed color"
     required: false
@@ -36,6 +28,22 @@ inputs:
   avatar_url:
     description: "Overrides Discord webhook avatar url"
     required: false
+  nofail:
+    description: "This action won't make workflow failed by default."
+    required: false
+    default: 'true'
+  nocontext:
+    description: "Suppress GitHub context fields"
+    required: false
+    default: 'false'
+  noprefix:
+    description: "Avoid appending job status to title"
+    required: false
+    default: 'false'
+  nodetail:
+    description: "Suppress detailed embed fields"
+    required: false
+    default: 'false'
 
 runs:
   using: 'node12'
