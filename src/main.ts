@@ -45,14 +45,20 @@ export function getPayload(inputs: Inputs): Object {
         color: inputs.color || statusOpts[inputs.status].color,
         timestamp: (new Date()).toISOString()
     }
+
+    // title
     if (inputs.title) {
         embed.title = inputs.title
     }
+    if (!inputs.noprefix) {
+        embed.title = statusOpts[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
+    }
+
     if (inputs.description) {
         embed.description = inputs.description
     }
-    if (!inputs.nodetail) {
-        embed.title = statusOpts[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
+
+    if (!inputs.nocontext) {
         embed.fields = [
             {
                 name: 'Repository',
