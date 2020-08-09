@@ -1,4 +1,4 @@
-name: "run"
+name: "test-run"
 on:
   push:
     branches-ignore:
@@ -23,5 +23,5 @@ jobs:
         uses: ./
         with:
           status: ${{ job.status }}
-          title: run
+          title: ${{ github.workflow }}
           nofail: false
