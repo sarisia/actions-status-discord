@@ -4,6 +4,8 @@ describe("getInputs()", () => {
     beforeEach(() => {
         // do we have more convenient way?
         delete process.env['INPUT_NODETAIL']
+        delete process.env['INPUT_NOCONTEXT']
+        delete process.env['INPUT_NOPREFIX']
         delete process.env['INPUT_WEBHOOK']
         delete process.env['INPUT_STATUS']
         delete process.env['INPUT_DESCRIPTION']
@@ -23,7 +25,8 @@ describe("getInputs()", () => {
 
     test("default", () => {
         const got = getInputs()
-        expect(got.nodetail).toBe(false)
+        expect(got.noprefix).toBe(false)
+        expect(got.nocontext).toBe(false)
         expect(got.webhooks).toStrictEqual(["https://env.webhook.invalid"])
         expect(got.status).toBe('success')
         expect(got.description).toBe('')
@@ -51,6 +54,27 @@ describe("getInputs()", () => {
         expect(got.title).toBe('title')
     })
 
+    test("nocontext", () => {
+        process.env['INPUT_NOCONTEXT'] = 'true'
+        const got = getInputs()
+        expect(got.nocontext).toBe(true)
+        expect(got.noprefix).toBe(false)
+    })
+
+    test("noprefix", () => {
+        process.env['INPUT_NOPREFIX'] = 'true'
+        const got = getInputs()
+        expect(got.nocontext).toBe(false)
+        expect(got.noprefix).toBe(true)
+    })
+
+    test("nodetail", () => {
+        process.env['INPUT_NODETAIL'] = 'true'
+        const got = getInputs()
+        expect(got.nocontext).toBe(true)
+        expect(got.noprefix).toBe(true)
+    })
+
     test("all (job)", () => {
         process.env['INPUT_NODETAIL'] = 'true'
         process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
@@ -62,7 +86,8 @@ describe("getInputs()", () => {
         process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
 
         const got = getInputs()
-        expect(got.nodetail).toBe(true)
+        expect(got.noprefix).toBe(true)
+        expect(got.nocontext).toBe(true)
         expect(got.webhooks).toStrictEqual([
             'https://input.webhook.invalid',
             'https://input2.webhook.invalid'
@@ -86,7 +111,8 @@ describe("getInputs()", () => {
         process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
 
         const got = getInputs()
-        expect(got.nodetail).toBe(true)
+        expect(got.noprefix).toBe(true)
+        expect(got.nocontext).toBe(true)
         expect(got.webhooks).toStrictEqual([
             'https://input.webhook.invalid',
             'https://input2.webhook.invalid'

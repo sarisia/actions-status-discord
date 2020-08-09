@@ -81,11 +81,13 @@ For `if` parameter, see
 | job | No | String | | **Deprecated. Will be removed in v2**<br>Job name included in message title. Same as `title` input. |
 | title | No | String | | String included in embed title. Overrides `job` input. |
 | description | No | String | | Description included in message |
-| nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
-| nodetail | No | `true` or `false` | `false` | Set `true` to suppress detailed fields |
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color |
 | username | No | String | | Overrides Discord webhook username |
 | avatar_url | No | String | | Overrides Discord webhook avatar url |
+| nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
+| nocontext | No | `true` or `false` | `false` | Set `true` to suppress GitHub context fields (`Repository`, `Ref`, etc). |
+| noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
+| nodetail | No | `true` or `false` | `false` | Set `true` will set both `nocontext` and `noprefix` to `true` |
 
 <!-- ## Migrate to v2
 

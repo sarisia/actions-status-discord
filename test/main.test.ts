@@ -27,7 +27,8 @@ mockedFormatEvent.mockReturnValue("mocked format event")
 describe('getPayload(Inputs)', () => {
     test("default", () => {
         const inputs: Inputs = {
-            nodetail: false,
+            nocontext: false,
+            noprefix: false,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
@@ -75,7 +76,8 @@ describe('getPayload(Inputs)', () => {
 
     test("nodetail", () => {
         const inputs: Inputs = {
-            nodetail: true,
+            nocontext: true,
+            noprefix: true,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
@@ -95,7 +97,8 @@ describe('getPayload(Inputs)', () => {
 
     test("nodetail with job", () => {
         const inputs: Inputs = {
-            nodetail: true,
+            nocontext: true,
+            noprefix: true,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
@@ -114,9 +117,81 @@ describe('getPayload(Inputs)', () => {
         expect(getPayload(inputs)).toStrictEqual(want)
     })
 
+    test("nocontext", () => {
+        const inputs: Inputs = {
+            nocontext: true,
+            noprefix: false,
+            webhooks: ['https://webhook.invalid'],
+            status: 'success',
+            description: '',
+            title: 'nocontext title',
+            color: NaN,
+            username: '',
+            avatar_url: ''
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                timestamp: expect.any(String),
+                title: "Success: nocontext title"
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("noprefix", () => {
+        const inputs: Inputs = {
+            nocontext: false,
+            noprefix: true,
+            webhooks: ['https://webhook.invalid'],
+            status: 'success',
+            description: '',
+            title: 'noprefix title',
+            color: NaN,
+            username: '',
+            avatar_url: ''
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                timestamp: expect.any(String),
+                title: 'noprefix title',
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        inline: true
+                    }
+                ]
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
     test("description", () => {
         const inputs: Inputs = {
-            nodetail: false,
+            nocontext: false,
+            noprefix: false,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: 'description test',
@@ -165,7 +240,8 @@ describe('getPayload(Inputs)', () => {
 
     test("job", () => {
         const inputs: Inputs = {
-            nodetail: false,
+            nocontext: false,
+            noprefix: false,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
@@ -213,7 +289,8 @@ describe('getPayload(Inputs)', () => {
 
     test("color", () => {
         const inputs: Inputs = {
-            nodetail: false,
+            nocontext: false,
+            noprefix: false,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
@@ -261,7 +338,8 @@ describe('getPayload(Inputs)', () => {
 
     test("username", () => {
         const inputs: Inputs = {
-            nodetail: false,
+            nocontext: false,
+            noprefix: false,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
@@ -310,7 +388,8 @@ describe('getPayload(Inputs)', () => {
 
     test("avatar_url", () => {
         const inputs: Inputs = {
-            nodetail: false,
+            nocontext: false,
+            noprefix: false,
             webhooks: ['https://webhook.invalid'],
             status: 'success',
             description: '',
