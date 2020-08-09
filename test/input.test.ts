@@ -68,6 +68,13 @@ describe("getInputs()", () => {
         expect(got.noprefix).toBe(true)
     })
 
+    test("nodetail", () => {
+        process.env['INPUT_NODETAIL'] = 'true'
+        const got = getInputs()
+        expect(got.nocontext).toBe(true)
+        expect(got.noprefix).toBe(true)
+    })
+
     test("all (job)", () => {
         process.env['INPUT_NODETAIL'] = 'true'
         process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
