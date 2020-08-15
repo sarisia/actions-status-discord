@@ -54,11 +54,13 @@ A Github Actions action to notify CI status to Discord.
 
 ```yaml
 - uses: sarisia/actions-status-discord@v1
+  if: always()
   env:
     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
   with:
     nodetail: true
     title: "We did it!"
+    color: 0xff91a4
 ```
 
 <img width="296" alt="Screen Shot 2020-05-14 at 11 43 28" src="https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png">
