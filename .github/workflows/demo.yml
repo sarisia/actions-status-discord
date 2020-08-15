@@ -1,5 +1,6 @@
 name: demo
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'demo*'
@@ -16,10 +17,8 @@ jobs:
       - name: minimum
         uses: ./
         if: always()
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEMO }}
         with:
-          status: ${{ job.status }}
+          webhook: ${{ secrets.DISCORD_DEMO }}
       - name: full options
         uses: ./
         if: always()
@@ -29,14 +28,17 @@ jobs:
           title: "deploy"
           description: "Build and deploy to GitHub Pages"
           nofail: false
-          nodetail: false
+          nocontext: false
+          noprefix: false
           color: 0x0000ff
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
       - name: no detail
         uses: ./
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          webhook: ${{ secrets.DISCORD_DEMO }}
           nodetail: true
           title: "We did it!"
           color: 0xff91a4
