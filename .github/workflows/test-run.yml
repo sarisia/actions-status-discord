@@ -22,6 +22,4 @@ jobs:
       - name: test
         uses: ./
         with:
-          status: ${{ job.status }}
-          title: ${{ github.workflow }}
           nofail: false

@@ -9,13 +9,14 @@ inputs:
   status:
     description: "Job status. Should be bound to job.status. Default to success."
     required: false
-    default: 'success'
+    default: ${{ job.status }}
   job:
     description: "Deprecated. Job name included in message title. Same as title input."
     required: false
   title:
     description: "String included in embed title. Overrides job input."
     required: false
+    default: ${{ github.workflow }}
   description:
     description: "Description included in message"
     required: false
