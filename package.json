@@ -1,6 +1,6 @@
 {
   "name": "actions-status-discord",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
