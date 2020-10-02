@@ -6,8 +6,12 @@ export function logError(msg: string) {
     NOFAIL ? core.error(msg) : core.setFailed(msg)
 }
 
-export function logInfo(msg: string) {
+export function logDebug(msg: string) {
     core.debug(msg)
+}
+
+export function logInfo(msg: string) {
+    core.info(msg)
 }
 
 export function logWarning(msg: string) {

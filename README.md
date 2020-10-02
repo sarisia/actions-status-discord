@@ -1,21 +1,13 @@
 # Actions Status Discord
 
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=sarisia/actions-status-discord)](https://dependabot.com)
-![test](https://github.com/sarisia/actions-status-discord/workflows/test/badge.svg)
-![run](https://github.com/sarisia/actions-status-discord/workflows/run/badge.svg)
-![run releases](https://github.com/sarisia/actions-status-discord/workflows/run%20releases/badge.svg)
-
 A Github Actions action to notify CI status to Discord.
-
----
 
 * [Usage](#usage)
 * [Environment Variables](#environment-variables)
 * [Inputs](#inputs)
 * [Tips](#tips)
+* [Troubleshooting](#troubleshooting)
 <!-- * [Migrate to v2](#migrate-to-v2) -->
-
----
 
 ## Usage
 
@@ -106,6 +98,23 @@ Just change `job` to `title` in your workflow file to make it work. -->
 
 ## Tips
 
+### Using markdown
+
+Some fields support markdown syntax.
+
+```yaml
+- uses: sarisia/actions-status-discord@v1
+  with:
+    webhook: ${{ secrets.DISCORD_WEBHOOK }}
+    nodetail: true
+    title: New version of `software` is ready!
+    description: |
+      Version `1.2.3-alpha`
+      Click [here](https://github.com/sarisia/actions-status-discord) to download!
+```
+
+<img width="373" alt="Screen Shot 2020-10-02 at 17 55 02" src="https://user-images.githubusercontent.com/33576079/94905884-85d97480-04d8-11eb-8707-f29b5a45ec0c.png">
+
 ### Trigger multiple webhooks
 
 You can set multiple webhooks separated with EOL (line break, `\n`) to Secrets.
@@ -134,3 +143,9 @@ you can use Guilded webhook endpoint in the same way as Discord webhook.
 <img width="431" alt="Screen Shot 2020-05-14 at 11 44 21" src="https://user-images.githubusercontent.com/33576079/81886777-841a1d80-95d8-11ea-9878-c3c10ab6f21b.png">
 
 </details>
+
+## Troubleshooting
+
+### `Error: Webhook response: 400: {"sender":["This field is required"]}`
+
+Do not append `/github` suffix to your webhook URL. See [Inputs](#inputs) section.

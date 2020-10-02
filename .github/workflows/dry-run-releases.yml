@@ -1,4 +1,4 @@
-name: "test-run release branch"
+name: "dry-run release branch"
 on:
   push:
     branches:
