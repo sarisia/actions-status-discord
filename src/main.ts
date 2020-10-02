@@ -1,3 +1,4 @@
+import * as core from '@actions/core'
 import * as github from '@actions/github'
 import axios from 'axios'
 import { formatEvent } from './format'
@@ -7,11 +8,19 @@ import { fitEmbed } from './validate'
 
 async function run() {
     try {
+        logInfo('Getting inputs...')
         const inputs = getInputs()
+
+        logInfo('Generating payload...')
         const payload = getPayload(inputs)
+        core.startGroup('Dump payload')
+            logInfo(JSON.stringify(payload, null, 2))
+        core.endGroup()
+
+        logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length>1 ? 's' : ''}...`)
         await Promise.all(inputs.webhooks.map(w => wrapWebhook(w.trim(), payload)))
     } catch(e) {
-        logError(e.message)
+        logError(`Unexpected failure: ${e} (${e.message})`)
     }
 }
 
@@ -21,7 +30,7 @@ function wrapWebhook(webhook: string, payload: Object): Promise<void> {
             await axios.post(webhook, payload)
         } catch(e) {
             if (e.response) {
-                logError(`${e.response.status}: ${JSON.stringify(e.response.data)}`)
+                logError(`Webhook response: ${e.response.status}: ${JSON.stringify(e.response.data)}`)
             } else {
                 logError(e)
             }
