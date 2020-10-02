@@ -7,7 +7,7 @@ export function logError(msg: string) {
 }
 
 export function logInfo(msg: string) {
-    core.debug(msg)
+    core.info(msg)
 }
 
 export function logWarning(msg: string) {
