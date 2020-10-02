@@ -1,5 +1,6 @@
-name: "test-run"
+name: "dry-run"
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - 'releases/**'
@@ -16,9 +17,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: build
-        run: |
-          npm ci
-          npm run build
+        run: npm run release
       - name: test
         uses: ./
         with:

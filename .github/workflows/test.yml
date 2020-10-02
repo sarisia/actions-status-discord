@@ -1,5 +1,6 @@
 name: "test"
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - 'releases/**'
@@ -15,7 +16,7 @@ jobs:
           node-version: '12.x'
       - run: npm ci
       - run: npm test
-      - run: npm run build
+      - run: npm run release
       - uses: sarisia/actions-status-discord@v1
         if: always()
         with:
