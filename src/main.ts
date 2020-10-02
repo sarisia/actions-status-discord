@@ -1,17 +1,26 @@
+import { endGroup, startGroup } from '@actions/core'
 import * as github from '@actions/github'
 import axios from 'axios'
 import { formatEvent } from './format'
 import { getInputs, Inputs, statusOpts } from './input'
-import { logError, logInfo } from './utils'
+import { logDebug, logError, logInfo } from './utils'
 import { fitEmbed } from './validate'
 
 async function run() {
     try {
+        logInfo('Getting inputs...')
         const inputs = getInputs()
+
+        logInfo('Generating payload...')
         const payload = getPayload(inputs)
+        startGroup('Dump payload')
+            logInfo(JSON.stringify(payload, null, 2))
+        endGroup()
+
+        logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length>1 ? 's' : ''}...`)
         await Promise.all(inputs.webhooks.map(w => wrapWebhook(w.trim(), payload)))
     } catch(e) {
-        logError(e.message)
+        logError(`Unexpected failure: ${e} (${e.message})`)
     }
 }
 
@@ -21,7 +30,7 @@ function wrapWebhook(webhook: string, payload: Object): Promise<void> {
             await axios.post(webhook, payload)
         } catch(e) {
             if (e.response) {
-                logError(`${e.response.status}: ${JSON.stringify(e.response.data)}`)
+                logError(`Webhook response: ${e.response.status}: ${JSON.stringify(e.response.data)}`)
             } else {
                 logError(e)
             }
@@ -36,7 +45,7 @@ export function getPayload(inputs: Inputs): Object {
     const repoURL = `https://github.com/${owner}/${repo}`
     const workflowURL = `${repoURL}/commit/${sha}/checks`
 
-    logInfo(JSON.stringify(payload))
+    logDebug(JSON.stringify(payload))
 
     const eventFieldTitle = `Event - ${eventName}`
     const eventDetail = formatEvent(eventName, payload)
@@ -91,7 +100,7 @@ export function getPayload(inputs: Inputs): Object {
     let discord_payload: any = {
         embeds: [fitEmbed(embed)]
     }
-    logInfo(`embed: ${JSON.stringify(embed)}`)
+    logDebug(`embed: ${JSON.stringify(embed)}`)
 
     if (inputs.username) {
         discord_payload.username = inputs.username

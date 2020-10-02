@@ -1,4 +1,4 @@
-import { logInfo } from "./utils"
+import { logDebug } from "./utils"
 
 type Formatter = (payload: any) => string
 
@@ -9,13 +9,13 @@ const formatters: Record<string, Formatter> = {
 }
 
 export function formatEvent(event: string, payload: Object): string {
-    logInfo(JSON.stringify(payload, null, 2))
+    logDebug(JSON.stringify(payload, null, 2))
     let msg: string = "No further information"
     if (event in formatters) {
         try {
             return formatters[event](payload) || msg
         } catch(e) {
-            logInfo(`Failed to generate eventDetail for ${event}: ${e}\n${e.stack}`)
+            logDebug(`Failed to generate eventDetail for ${event}: ${e}\n${e.stack}`)
         }
     }
 
