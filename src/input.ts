@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { stob } from './utils'
+import { logWarning, stob } from './utils'
 
 export interface Inputs {
     readonly webhooks: string[]
@@ -38,7 +38,13 @@ export function getInputs(): Inputs {
     const webhook: string = core.getInput('webhook').trim() || process.env.DISCORD_WEBHOOK || ''
     const webhooks: string[] = webhook.split('\n').filter(x => x || false)
     // prevent webhooks from leak
-    webhooks.forEach(w => core.setSecret(w))
+    webhooks.forEach((w, i) => {
+        core.setSecret(w)
+        // if webhook has `/github` suffix, warn them (do not auto-fix)
+        if (w.endsWith('/github')) {
+            logWarning(`webhook ${i+1}/${webhooks.length} has \`/github\` suffix! This may cause errors.`)
+        }
+    })
 
     // nodetail -> nocontext, noprefix
     const nodetail = stob(core.getInput('nodetail'))
