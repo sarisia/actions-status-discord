@@ -37,8 +37,17 @@ jobs:
         uses: ./
         if: always()
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEMO }}
         with:
           nodetail: true
           title: "We did it!"
           color: 0xff91a4
+      - name: markdown
+        uses: ./
+        with:
+          webhook: ${{ secrets.DISCORD_DEMO }}
+          nodetail: true
+          title: New version of `software` is ready!
+          description: |
+            Version `1.2.3-alpha`
+            Click [here](https://github.com/sarisia/actions-status-discord) to download!
