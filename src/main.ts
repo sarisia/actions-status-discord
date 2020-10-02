@@ -1,9 +1,9 @@
-import * as core from '@actions/core'
+import { endGroup, startGroup } from '@actions/core'
 import * as github from '@actions/github'
 import axios from 'axios'
 import { formatEvent } from './format'
 import { getInputs, Inputs, statusOpts } from './input'
-import { logError, logInfo } from './utils'
+import { logDebug, logError, logInfo } from './utils'
 import { fitEmbed } from './validate'
 
 async function run() {
@@ -13,9 +13,9 @@ async function run() {
 
         logInfo('Generating payload...')
         const payload = getPayload(inputs)
-        core.startGroup('Dump payload')
+        startGroup('Dump payload')
             logInfo(JSON.stringify(payload, null, 2))
-        core.endGroup()
+        endGroup()
 
         logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length>1 ? 's' : ''}...`)
         await Promise.all(inputs.webhooks.map(w => wrapWebhook(w.trim(), payload)))
@@ -45,7 +45,7 @@ export function getPayload(inputs: Inputs): Object {
     const repoURL = `https://github.com/${owner}/${repo}`
     const workflowURL = `${repoURL}/commit/${sha}/checks`
 
-    logInfo(JSON.stringify(payload))
+    logDebug(JSON.stringify(payload))
 
     const eventFieldTitle = `Event - ${eventName}`
     const eventDetail = formatEvent(eventName, payload)
@@ -100,7 +100,7 @@ export function getPayload(inputs: Inputs): Object {
     let discord_payload: any = {
         embeds: [fitEmbed(embed)]
     }
-    logInfo(`embed: ${JSON.stringify(embed)}`)
+    logDebug(`embed: ${JSON.stringify(embed)}`)
 
     if (inputs.username) {
         discord_payload.username = inputs.username
