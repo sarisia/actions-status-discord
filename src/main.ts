@@ -59,6 +59,13 @@ export function getPayload(inputs: Inputs): Object {
     if (inputs.title) {
         embed.title = inputs.title
     }
+
+    if (inputs.image) {
+        embed.image = {
+            url: inputs.image
+        }
+    }
+
     if (!inputs.noprefix) {
         embed.title = statusOpts[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
     }
