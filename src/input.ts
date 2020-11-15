@@ -6,6 +6,7 @@ export interface Inputs {
     status:string
     description: string
     title: string
+    image: string
     color: number
     username: string
     avatar_url: string
@@ -56,6 +57,7 @@ export function getInputs(): Inputs {
         status: core.getInput('status').trim().toLowerCase(),
         description: core.getInput('description').trim(),
         title: (core.getInput('title') || core.getInput('job')).trim(),
+        image: core.getInput('image').trim(),
         color: parseInt(core.getInput('color')),
         username: core.getInput('username').trim(),
         avatar_url: core.getInput('avatar_url').trim(),
