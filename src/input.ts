@@ -2,15 +2,15 @@ import * as core from '@actions/core'
 import { logWarning, stob } from './utils'
 
 export interface Inputs {
-    readonly webhooks: string[]
-    readonly status:string
-    readonly description: string
-    readonly title: string
-    readonly color: number
-    readonly username: string
-    readonly avatar_url: string
-    readonly nocontext: boolean
-    readonly noprefix: boolean
+    webhooks: string[]
+    status:string
+    description: string
+    title: string
+    color: number
+    username: string
+    avatar_url: string
+    nocontext: boolean
+    noprefix: boolean
 }
 
 interface StatusOption {
