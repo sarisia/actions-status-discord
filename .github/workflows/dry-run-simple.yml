@@ -1,4 +1,4 @@
-name: "dry-run"
+name: "dry-run (simple)"
 on:
   workflow_dispatch:
   push:
@@ -18,7 +18,7 @@ jobs:
           node-version: '12.x'
       - name: build
         run: npm run release
-      - name: test
+      - name: run
         uses: ./
         with:
           nofail: false

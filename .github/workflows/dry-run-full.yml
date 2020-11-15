@@ -1,5 +1,6 @@
-name: "dry-run release branch"
+name: "dry-run (full)"
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'releases/**'
@@ -13,9 +14,9 @@ jobs:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - uses: actions/checkout@v2
-      - name: test simple
+      - name: run simple
         uses: ./
-      - name: test full
+      - name: run full
         uses: ./
         with:
           status: Failure
@@ -23,10 +24,11 @@ jobs:
           description: "testing `releases/v1` branch"
           nofail: false
           nodetail: false
+          image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
           color: 0xFFFFFF
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
-      - name: test nodetail
+      - name: run nodetail
         uses: ./
         with:
           status: Cancelled
