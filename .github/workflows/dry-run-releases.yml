@@ -23,6 +23,7 @@ jobs:
           description: "testing `releases/v1` branch"
           nofail: false
           nodetail: false
+          image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
           color: 0xFFFFFF
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
