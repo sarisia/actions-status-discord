@@ -32,6 +32,7 @@ describe('getPayload(Inputs)', () => {
         status: 'success',
         description: '',
         title: '',
+        image: '',
         color: NaN,
         username: '',
         avatar_url: ''
@@ -252,6 +253,50 @@ describe('getPayload(Inputs)', () => {
             }]
         }
         expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("image", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            image: "https://example.com/testimage.png"
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                timestamp: expect.any(String),
+                title: 'Success',
+                image: {
+                    url: "https://example.com/testimage.png"
+                },
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        inline: true
+                    }
+                ]
+            }]
+        }
     })
 
     test("color", () => {

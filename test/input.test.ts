@@ -11,6 +11,7 @@ describe("getInputs()", () => {
         delete process.env['INPUT_DESCRIPTION']
         delete process.env['INPUT_JOB']
         delete process.env['INPUT_TITLE']
+        delete process.env['INPUT_IMAGE']
         delete process.env['INPUT_COLOR']
         delete process.env['INPUT_USERNAME']
         delete process.env['INPUT_AVATAR_URL']
@@ -31,6 +32,7 @@ describe("getInputs()", () => {
         expect(got.status).toBe('success')
         expect(got.description).toBe('')
         expect(got.title).toBe('')
+        expect(got.image).toBe('')
         expect(got.color).toBeFalsy()
         expect(got.username).toBe('')
         expect(got.avatar_url).toBe('')
@@ -106,6 +108,7 @@ describe("getInputs()", () => {
         process.env['INPUT_STATUS'] = 'Cancelled'
         process.env['INPUT_DESCRIPTION'] = 'description text'
         process.env['INPUT_TITLE'] = 'job text\n\n\n\n\n'
+        process.env['INPUT_IMAGE'] = '\n\nhttps://example.com/inputimage.png'
         process.env['INPUT_COLOR'] = '0xffffff'
         process.env['INPUT_USERNAME'] = 'jest test'
         process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
@@ -120,6 +123,7 @@ describe("getInputs()", () => {
         expect(got.status).toBe('cancelled')
         expect(got.description).toBe('description text')
         expect(got.title).toBe('job text')
+        expect(got.image).toBe('https://example.com/inputimage.png')
         expect(got.color).toBe(0xffffff)
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
