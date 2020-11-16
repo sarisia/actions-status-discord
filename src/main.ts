@@ -38,7 +38,7 @@ function wrapWebhook(webhook: string, payload: Object): Promise<void> {
     }()
 }
 
-export function getPayload(inputs: Inputs): Object {
+export function getPayload(inputs: Readonly<Inputs>): Object {
     const ctx = github.context
     const { owner, repo } = ctx.repo
     const { eventName, sha, ref, workflow, actor, payload } = ctx
@@ -59,6 +59,13 @@ export function getPayload(inputs: Inputs): Object {
     if (inputs.title) {
         embed.title = inputs.title
     }
+
+    if (inputs.image) {
+        embed.image = {
+            url: inputs.image
+        }
+    }
+
     if (!inputs.noprefix) {
         embed.title = statusOpts[inputs.status].status + (embed.title ? `: ${embed.title}` : '')
     }

@@ -2,15 +2,16 @@ import * as core from '@actions/core'
 import { logWarning, stob } from './utils'
 
 export interface Inputs {
-    readonly webhooks: string[]
-    readonly status:string
-    readonly description: string
-    readonly title: string
-    readonly color: number
-    readonly username: string
-    readonly avatar_url: string
-    readonly nocontext: boolean
-    readonly noprefix: boolean
+    webhooks: string[]
+    status:string
+    description: string
+    title: string
+    image: string
+    color: number
+    username: string
+    avatar_url: string
+    nocontext: boolean
+    noprefix: boolean
 }
 
 interface StatusOption {
@@ -56,6 +57,7 @@ export function getInputs(): Inputs {
         status: core.getInput('status').trim().toLowerCase(),
         description: core.getInput('description').trim(),
         title: (core.getInput('title') || core.getInput('job')).trim(),
+        image: core.getInput('image').trim(),
         color: parseInt(core.getInput('color')),
         username: core.getInput('username').trim(),
         avatar_url: core.getInput('avatar_url').trim(),

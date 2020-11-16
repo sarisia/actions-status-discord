@@ -20,6 +20,9 @@ inputs:
   description:
     description: "Description included in message"
     required: false
+  image:
+    description: "Image attached to the message"
+    required: false
   color:
     description: "Overrides Discord embed color"
     required: false
