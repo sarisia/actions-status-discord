@@ -74,6 +74,7 @@ For `if` parameter, see
 | status | No | `Success`, `Failure` or `Cancelled` | `${{ job.status }}` | See [Document for `job` context](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-context) |
 | title | No | String | `${{ github.workflow}}` | String included in embed title. Overrides `job` input. |
 | description | No | String | | Description included in message |
+| image | No | String | | Image attached to the message |
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color |
 | username | No | String | | Overrides Discord webhook username |
 | avatar_url | No | String | | Overrides Discord webhook avatar url |
