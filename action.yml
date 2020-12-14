@@ -48,6 +48,10 @@ inputs:
     description: "Suppress detailed embed fields"
     required: false
     default: 'false'
+  report_only_failures:
+    description: "When set to true, does not send webhook if status is `success`"
+    required: false
+    default: 'false'
 
 runs:
   using: 'node12'

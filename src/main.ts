@@ -17,11 +17,24 @@ async function run() {
             logInfo(JSON.stringify(payload, null, 2))
         endGroup()
 
+        if (!shouldReportWebook(inputs)) {
+            logInfo(`Not triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length>1 ? 's' : ''}, because of report_only_failures `)
+            return
+        }
+
         logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length>1 ? 's' : ''}...`)
+
         await Promise.all(inputs.webhooks.map(w => wrapWebhook(w.trim(), payload)))
     } catch(e) {
         logError(`Unexpected failure: ${e} (${e.message})`)
     }
+}
+
+export function shouldReportWebook(inputs: Inputs): boolean {
+    if (inputs.status !== "success")
+        return true
+
+    return !(inputs.report_only_failures && inputs.status === "success");
 }
 
 function wrapWebhook(webhook: string, payload: Object): Promise<void> {

@@ -1,6 +1,6 @@
 import { formatEvent } from '../src/format'
 import { Inputs } from '../src/input'
-import { getPayload } from '../src/main'
+import {getPayload, shouldReportWebook} from '../src/main'
 
 jest.mock('@actions/github', () => {
     return {
@@ -35,7 +35,8 @@ describe('getPayload(Inputs)', () => {
         image: '',
         color: NaN,
         username: '',
-        avatar_url: ''
+        avatar_url: '',
+        report_only_failures: false
     }
 
     test("default", () => {
@@ -297,6 +298,7 @@ describe('getPayload(Inputs)', () => {
                 ]
             }]
         }
+        expect(getPayload(inputs)).toStrictEqual(want)
     })
 
     test("color", () => {
@@ -425,5 +427,46 @@ describe('getPayload(Inputs)', () => {
             avatar_url: "https://avatar.invalid/avatar.png"
         }
         expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("on success, when report only failure is set to false - send a webhook", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            report_only_failures: false,
+            status: "success"
+        }
+
+        expect(shouldReportWebook(inputs)).toBe(true)
+
+    })
+
+    test("on success, when report only failure is set to true - don't send a webhook", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            report_only_failures: true,
+            status: "success"
+        }
+
+        expect(shouldReportWebook(inputs)).toBe(false)
+
+    })
+    test("on failure, when report only failure is set to false - send a webhook", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            report_only_failures: false,
+            status: "not a success"
+        }
+
+        expect(shouldReportWebook(inputs)).toBe(true)
+    })
+
+    test("on failure, when report only failure is set to true - send a webhook", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            report_only_failures: true,
+            status: "not a success"
+        }
+
+        expect(shouldReportWebook(inputs)).toBe(true)
     })
 })

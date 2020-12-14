@@ -82,6 +82,7 @@ For `if` parameter, see
 | nocontext | No | `true` or `false` | `false` | Set `true` to suppress GitHub context fields (`Repository`, `Ref`, etc). |
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
 | nodetail | No | `true` or `false` | `false` | Set `true` will set both `nocontext` and `noprefix` to `true` |
+| report_only_failures | No | `true` or `false` | `false` | Set to `true` will report only when status is not `succeeded` |
 
 ### Deprecated inputs
 

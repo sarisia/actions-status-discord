@@ -15,11 +15,13 @@ describe("getInputs()", () => {
         delete process.env['INPUT_COLOR']
         delete process.env['INPUT_USERNAME']
         delete process.env['INPUT_AVATAR_URL']
+        delete process.env['INPUT_REPORT_FAILURES']
 
         // see action.yml for default values
         process.env['INPUT_STATUS'] = 'success'
         process.env['INPUT_NOFAIL'] = 'true'
         process.env['INPUT_NODETAIL'] = 'false'
+        process.env['INPUT_REPORT_FAILURES'] = 'false'
 
         process.env['DISCORD_WEBHOOK'] = "https://env.webhook.invalid"
     })
@@ -36,6 +38,7 @@ describe("getInputs()", () => {
         expect(got.color).toBeFalsy()
         expect(got.username).toBe('')
         expect(got.avatar_url).toBe('')
+        expect(got.report_only_failures).toBe(false)
     })
 
     test("no webhooks", () => {
@@ -86,6 +89,7 @@ describe("getInputs()", () => {
         process.env['INPUT_COLOR'] = '0xffffff'
         process.env['INPUT_USERNAME'] = 'jest test'
         process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
+        process.env['INPUT_REPORT_ONLY_FAILURES'] = 'false'
 
         const got = getInputs()
         expect(got.noprefix).toBe(true)
@@ -100,6 +104,7 @@ describe("getInputs()", () => {
         expect(got.color).toBe(0xffffff)
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
+        expect(got.report_only_failures).toBe(false)
     })
 
     test("all (title)", () => {
@@ -112,6 +117,7 @@ describe("getInputs()", () => {
         process.env['INPUT_COLOR'] = '0xffffff'
         process.env['INPUT_USERNAME'] = 'jest test'
         process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
+        process.env['INPUT_REPORT_FAILURES'] = 'false'
 
         const got = getInputs()
         expect(got.noprefix).toBe(true)
@@ -127,5 +133,6 @@ describe("getInputs()", () => {
         expect(got.color).toBe(0xffffff)
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
+        expect(got.report_only_failures).toBe(false)
     })
 })

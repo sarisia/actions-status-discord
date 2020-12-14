@@ -12,6 +12,7 @@ export interface Inputs {
     avatar_url: string
     nocontext: boolean
     noprefix: boolean
+    report_only_failures: boolean
 }
 
 interface StatusOption {
@@ -62,7 +63,8 @@ export function getInputs(): Inputs {
         username: core.getInput('username').trim(),
         avatar_url: core.getInput('avatar_url').trim(),
         nocontext: nocontext,
-        noprefix: noprefix
+        noprefix: noprefix,
+        report_only_failures: stob(core.getInput("report_only_failures"))
     }
 
     // validate
