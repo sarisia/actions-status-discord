@@ -1,6 +1,11 @@
 name: demo
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'demo**'
+    tags-ignore:
+      - '**'
 
 jobs:
   demo:
