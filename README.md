@@ -1,12 +1,24 @@
 # Actions Status Discord
 
-A Github Actions action to notify CI status to Discord.
+Discord Notification Made Easy.
 
-* [Usage](#usage)
-* [Environment Variables](#environment-variables)
-* [Inputs](#inputs)
-* [Tips](#tips)
-* [Troubleshooting](#troubleshooting)
+![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
+
+- :sushi: Zero-configure! Works perfectly out of the box.
+- :sushi: Universal! Supports Linux (Ubuntu), macOS and Windows.
+- :sushi: Faster startup! Faster than ones written in Docker container action.
+
+- [Usage](#usage)
+- [Configuration](#configuration)
+  - [Environment Variables](#environment-variables)
+  - [Inputs](#inputs)
+- [Tips](#tips)
+- [FAQ](#faq)
+- [Questions? Bugs?](#questions-bugs)
+
+> :warning: If you're reading this document in Marketplace page,
+> please refer to the [latest document here](https://github.com/sarisia/actions-status-discord). 
+
 <!-- * [Migrate to v2](#migrate-to-v2) -->
 
 ## Usage
@@ -20,7 +32,7 @@ A Github Actions action to notify CI status to Discord.
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
 ```
 
-<img width="393" alt="Screen Shot 2020-05-14 at 11 42 20" src="https://user-images.githubusercontent.com/33576079/81886730-651b8b80-95d8-11ea-923d-b1a896b4a9a0.png">
+![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
 
 ### Full options
 
@@ -29,18 +41,15 @@ A Github Actions action to notify CI status to Discord.
   if: always()
   with:
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
-    status: ${{ job.status }}
     title: "deploy"
     description: "Build and deploy to GitHub Pages"
-    nofail: false
-    nocontext: false
-    noprefix: false
+    image: ${{ secrets.EMBED_IMAGE }}
     color: 0x0000ff
     username: GitHub Actions
     avatar_url: ${{ secrets.AVATAR_URL }}
 ```
 
-<img width="391" alt="Screen Shot 2020-05-14 at 11 42 53" src="https://user-images.githubusercontent.com/33576079/81886733-677de580-95d8-11ea-831c-dba1698757ec.png">
+![image](https://user-images.githubusercontent.com/33576079/102154036-ecf1ad00-3ebb-11eb-9af3-ff58982d9ecb.png)
 
 ### No detail
 
@@ -55,18 +64,20 @@ A Github Actions action to notify CI status to Discord.
     color: 0xff91a4
 ```
 
-<img width="296" alt="Screen Shot 2020-05-14 at 11 43 28" src="https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png">
+![image](https://user-images.githubusercontent.com/33576079/102154072-009d1380-3ebc-11eb-9fe9-24d35a0e1e7b.png)
 
 For `if` parameter, see
 [GitHub Actions Reference](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions)
 
-## Environment Variables
+## Configuration
+
+### Environment Variables
 
 | Key | Value | Description |
 | - | - | - |
 | DISCORD_WEBHOOK | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...` | You can provide webhook via inputs either.<br>**DO NOT APPEND [`/github` SUFFIX](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)!**
 
-## Inputs
+### Inputs
 
 | Key | Required | Value | Default | Description |
 | - | - | - | - | - |
@@ -83,11 +94,14 @@ For `if` parameter, see
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
 | nodetail | No | `true` or `false` | `false` | Set `true` will set both `nocontext` and `noprefix` to `true` |
 
-### Deprecated inputs
+<details>
+<summary>Show deprecated</summary>
 
 | Key | Required | Value | Default | Description |
 | - | - | - | - | - |
 | job | No | String | | **Deprecated. Will be removed in v2**<br>Job name included in message title. Same as `title` input. |
+
+</details>
 
 <!-- ## Migrate to v2
 
@@ -114,7 +128,7 @@ Some fields support markdown syntax.
       Click [here](https://github.com/sarisia/actions-status-discord) to download!
 ```
 
-<img width="373" alt="Screen Shot 2020-10-02 at 17 55 02" src="https://user-images.githubusercontent.com/33576079/94905884-85d97480-04d8-11eb-8707-f29b5a45ec0c.png">
+![image](https://user-images.githubusercontent.com/33576079/102154106-0f83c600-3ebc-11eb-9b4e-b8a90afae4db.png)
 
 ### Trigger multiple webhooks
 
@@ -145,8 +159,13 @@ you can use Guilded webhook endpoint in the same way as Discord webhook.
 
 </details>
 
-## Troubleshooting
+## FAQ
 
 ### `Error: Webhook response: 400: {"sender":["This field is required"]}`
 
 Do not append `/github` suffix to your webhook URL. See [Inputs](#inputs) section.
+
+## Questions? Bugs?
+
+Feel free to ask in [Discussions](https://github.com/sarisia/actions-status-discord/discussions),
+or report bugs in [Issues](https://github.com/sarisia/actions-status-discord/issues)!
