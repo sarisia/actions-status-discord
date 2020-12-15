@@ -4,9 +4,11 @@ Discord Notification Made Easy.
 
 ![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
 
-- :sushi: Zero-configure! Works perfectly out of the box.
-- :sushi: Universal! Supports Linux (Ubuntu), macOS and Windows.
-- :sushi: Faster startup! Faster than ones written in Docker container action.
+- :sushi: **_Zero-configure!_** Works perfectly out of the box.
+- :sushi: **_Universal!_** Supports Linux (Ubuntu), macOS and Windows.
+- :sushi: **_Faster startup!_** Faster than ones written in Docker container action.
+
+---
 
 - [Usage](#usage)
 - [Configuration](#configuration)
