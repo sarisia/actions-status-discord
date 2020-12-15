@@ -3,7 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'demo*'
+      - 'demo**'
+    tags-ignore:
+      - '**'
 
 jobs:
   demo:
@@ -24,12 +26,9 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_DEMO }}
-          status: ${{ job.status }}
           title: "deploy"
           description: "Build and deploy to GitHub Pages"
-          nofail: false
-          nocontext: false
-          noprefix: false
+          image: ${{ secrets.EMBED_IMAGE }}
           color: 0x0000ff
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}

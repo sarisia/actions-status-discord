@@ -8,7 +8,16 @@ on:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-20.04
+          - macos-latest
+          - macos-11.0
+          - windows-latest
+
+    runs-on: ${{ matrix.os }}
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
@@ -21,4 +30,5 @@ jobs:
       - name: run
         uses: ./
         with:
+          title: dry run (${{ matrix.os }})
           nofail: false
