@@ -1,0 +1,38 @@
+name: "releases/v1 fixed dry-run (full)"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'releases/v1'
+    tags-ignore:
+      - '**'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+    steps:
+      # checkout cannot detect job
+      # - uses: actions/checkout@v2
+      - name: run simple
+        uses: sarisia/actions-status-discord@releases/v1
+      - name: run full
+        uses: sarisia/actions-status-discord@releases/v1
+        with:
+          status: Failure
+          title: "${{ github.workflow }} - must failure"
+          description: "testing `releases/v1` branch"
+          nofail: false
+          nodetail: false
+          image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
+          color: 0xFFFFFF
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}
+      - name: run nodetail
+        uses: sarisia/actions-status-discord@releases/v1
+        with:
+          status: Cancelled
+          title: "${{ github.workflow }} - no details"
+          nodetail: true
+          nofail: false
