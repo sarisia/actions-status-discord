@@ -47,7 +47,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const jobs = github.actions.listJobsForWorkflowRun({
+            const jobs = await github.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: context.runId
