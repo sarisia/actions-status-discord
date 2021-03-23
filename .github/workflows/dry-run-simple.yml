@@ -47,13 +47,15 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const { jobs } = await github.paginate(
+            const { data: { jobs } } = await github.paginate(
               github.actions.listJobsForWorkflowRun({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 run_id: context.runId
               })
             )
+            console.log(jobs)
+            console.log(data)
             return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
                        .length > 0 ? 'failure' : 'success'
       - uses: sarisia/actions-status-discord@v1
