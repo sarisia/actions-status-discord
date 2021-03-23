@@ -20,12 +20,12 @@ jobs:
         uses: ./
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_DEMO }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
       - name: full options
         uses: ./
         if: always()
         with:
-          webhook: ${{ secrets.DISCORD_DEMO }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "deploy"
           description: "Build and deploy to GitHub Pages"
           image: ${{ secrets.EMBED_IMAGE }}
@@ -36,7 +36,7 @@ jobs:
         uses: ./
         if: always()
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_DEMO }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           nodetail: true
           title: "We did it!"
@@ -44,7 +44,7 @@ jobs:
       - name: markdown
         uses: ./
         with:
-          webhook: ${{ secrets.DISCORD_DEMO }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           nodetail: true
           title: New version of `software` is ready!
           description: |

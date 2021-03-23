@@ -11,7 +11,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_VERBOSE }}
     steps:
       - uses: actions/checkout@v2
       - name: run simple

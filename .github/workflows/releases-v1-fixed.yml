@@ -11,11 +11,12 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_VERBOSE }}
     steps:
       # checkout cannot detect job
       # - uses: actions/checkout@v2
       - name: run simple
+        # do not reference as local action! (runs: ./)
         uses: sarisia/actions-status-discord@releases/v1
       - name: run full
         uses: sarisia/actions-status-discord@releases/v1
