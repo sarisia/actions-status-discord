@@ -1,13 +1,13 @@
 {
   "name": "actions-status-discord",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/main.js",
   "scripts": {
     "test": "jest --verbose --ci --detectOpenHandles",
     "build": "npx tsc",
     "version": "npm run release && git add .",
-    "release": "npm install && npm run build && npm prune --production"
+    "release": "npm ci && npm run build && npm prune --production"
   },
   "author": "Sarisia",
   "license": "MIT",
