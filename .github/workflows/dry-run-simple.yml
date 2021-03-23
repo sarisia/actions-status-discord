@@ -12,14 +12,14 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - ubuntu-20.04
-          - ubuntu-18.04
-          - ubuntu-16.04
-          - macos-latest
-          - macos-11.0
-          - macos-10.15
-          - windows-latest
-          - windows-2019
+          # - ubuntu-20.04
+          # - ubuntu-18.04
+          # - ubuntu-16.04
+          # - macos-latest
+          # - macos-11.0
+          # - macos-10.15
+          # - windows-latest
+          # - windows-2019
 
     runs-on: ${{ matrix.os }}
     env:
@@ -47,7 +47,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const { data: { jobs } } = await github.paginate(
+            const resp = await github.paginate(
               github.actions.listJobsForWorkflowRun,
               {
                 owner: context.repo.owner,
@@ -55,6 +55,7 @@ jobs:
                 run_id: context.runId
               }
             )
+            console.log(resp)
             console.log(jobs)
             console.log(data)
             return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
