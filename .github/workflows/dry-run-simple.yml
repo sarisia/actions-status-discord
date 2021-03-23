@@ -47,7 +47,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const jobs = await github.paginate(
+            const { jobs } = await github.paginate(
               github.actions.listJobsForWorkflowRun({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
