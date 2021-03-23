@@ -47,12 +47,15 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const jobs = await github.actions.listJobsForWorkflowRun({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: context.runId
-            })
+            const jobs = await github.pagenate(
+              github.actions.listJobsForWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.runId
+              })
+            )
             console.log(jobs)
+      - run: sleep 300
       - uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
