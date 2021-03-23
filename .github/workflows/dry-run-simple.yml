@@ -54,9 +54,10 @@ jobs:
                 run_id: context.runId
               })
             )
-            console.log(jobs)
-      - run: sleep 300
+            return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
+                       .length > 0 ? 'failure' : 'success'
       - uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ steps.ghapi.outputs.result }}
           title: Dry run conclusion
