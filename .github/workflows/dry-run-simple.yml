@@ -47,14 +47,14 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const resp = await github.paginate(
-              github.actions.listJobsForWorkflowRun({
+            const { data: { jobs } } = await github.paginate(
+              github.actions.listJobsForWorkflowRun,
+              {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 run_id: context.runId
-              })
+              }
             )
-            console.log(resp)
             console.log(jobs)
             console.log(data)
             return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
