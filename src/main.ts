@@ -43,7 +43,10 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
     const { owner, repo } = ctx.repo
     const { eventName, sha, ref, workflow, actor, payload } = ctx
     const repoURL = `https://github.com/${owner}/${repo}`
-    const workflowURL = `${repoURL}/commit/${sha}/checks`
+    // if the trigger is pull_request, check `github.event.pull_request.head.sha` first.
+    // see issues/132
+    const validSHA = ctx.payload.pull_request?.head?.sha || sha
+    const workflowURL = `${repoURL}/commit/${validSHA}/checks`
 
     logDebug(JSON.stringify(payload))
 
