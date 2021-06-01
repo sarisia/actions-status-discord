@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest --verbose --ci --detectOpenHandles",
     "build": "npx tsc",
-    "release": "npm install && npm run build && npm prune --production",
-    "version": "npm run release"
+    "release": "rm -rf node_modules && npm ci && npm run build && npm prune --production",
+    "version": "npm run release && git add ."
   },
   "author": "Sarisia",
   "license": "MIT",
