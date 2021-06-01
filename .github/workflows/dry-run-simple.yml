@@ -42,7 +42,7 @@ jobs:
     needs: dryrun
     if: always()
     steps:
-      - uses: actions/github-script@v3
+      - uses: actions/github-script@v4.0.2
         id: ghapi
         with:
           result-encoding: string
