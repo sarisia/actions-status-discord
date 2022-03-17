@@ -20,6 +20,9 @@ inputs:
   description:
     description: "Description included in message"
     required: false
+  url:
+    description: "URL to link with title"
+    required: false
   image:
     description: "Image attached to the message"
     required: false
@@ -32,6 +35,10 @@ inputs:
   avatar_url:
     description: "Overrides Discord webhook avatar url"
     required: false
+  notime:
+    description: "This action won't embed a timestamp."
+    required: false
+    default: 'false'
   nofail:
     description: "This action won't make workflow failed by default."
     required: false
