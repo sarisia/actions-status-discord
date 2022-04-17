@@ -4,9 +4,9 @@ Discord Notification Made Easy.
 
 ![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
 
-- :sushi: **_Zero-configure!_** Works perfectly out of the box.
-- :sushi: **_Universal!_** Supports Linux (Ubuntu), macOS and Windows.
-- :sushi: **_Faster startup!_** Faster than ones written in Docker container action.
+- :sushi: **_Zero-configuration!_** Works perfectly out of the box.
+- :sushi: **_Universal!_** Supports Linux (Ubuntu), macOS and Windows runners.
+- :sushi: **_Fast startup!_** Faster than ones written as Docker container action.
 
 ---
 
@@ -18,8 +18,8 @@ Discord Notification Made Easy.
 - [FAQ](#faq)
 - [Questions? Bugs?](#questions-bugs)
 
-> :warning: If you're reading this document in Marketplace page,
-> please refer to the [latest document here](https://github.com/sarisia/actions-status-discord). 
+> :warning: If you're reading this document in master branch,
+> please refer to the [latest released document here](https://github.com/marketplace/actions/actions-status-discord). 
 
 <!-- * [Migrate to v2](#migrate-to-v2) -->
 
@@ -81,6 +81,8 @@ For `if` parameter, see
 
 ### Inputs
 
+#### General customizations
+
 | Key | Required | Value | Default | Description |
 | - | - | - | - | - |
 | webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>This overrides `env.DISCORD_WEBHOOK`.<br>**DO NOT APPEND [`/github` SUFFIX](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)!** |
@@ -89,12 +91,20 @@ For `if` parameter, see
 | description | No | String | | Description included in message |
 | image | No | String | | Image attached to the message |
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color |
+| url | No | String | | URL to jump when the title is clicked |
 | username | No | String | | Overrides Discord webhook username |
 | avatar_url | No | String | | Overrides Discord webhook avatar url |
+
+#### Advanced usages
+
+| Key | Required | Value | Default | Description |
+| - | - | - | - | - |
 | nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
 | nocontext | No | `true` or `false` | `false` | Set `true` to suppress GitHub context fields (`Repository`, `Ref`, etc). |
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
 | nodetail | No | `true` or `false` | `false` | Set `true` will set both `nocontext` and `noprefix` to `true` |
+| notimestamp | No | `true` or `false` | `false` | Set `true` to avoid appending timestamp |
+
 
 <details>
 <summary>Show deprecated</summary>

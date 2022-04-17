@@ -3,24 +3,21 @@ import { getInputs } from '../src/input'
 describe("getInputs()", () => {
     beforeEach(() => {
         // do we have more convenient way?
-        delete process.env['INPUT_NODETAIL']
-        delete process.env['INPUT_NOCONTEXT']
-        delete process.env['INPUT_NOPREFIX']
-        delete process.env['INPUT_WEBHOOK']
-        delete process.env['INPUT_STATUS']
-        delete process.env['INPUT_DESCRIPTION']
-        delete process.env['INPUT_JOB']
-        delete process.env['INPUT_TITLE']
-        delete process.env['INPUT_IMAGE']
-        delete process.env['INPUT_COLOR']
-        delete process.env['INPUT_USERNAME']
-        delete process.env['INPUT_AVATAR_URL']
-
+        for (const prop in process.env) {
+            if (prop.startsWith("INPUT_"))
+                delete process.env[prop]
+        }
+        
         // see action.yml for default values
         process.env['INPUT_STATUS'] = 'success'
+        process.env['INPUT_TITLE'] = 'github actions'
         process.env['INPUT_NOFAIL'] = 'true'
+        process.env['INPUT_NOCONTEXT'] = 'false'
+        process.env['INPUT_NOPREFIX'] = 'false'
         process.env['INPUT_NODETAIL'] = 'false'
+        process.env['INPUT_NOTIMESTAMP'] = 'false'
 
+        // no defaults in action.yml, but need for passing validation
         process.env['DISCORD_WEBHOOK'] = "https://env.webhook.invalid"
     })
 
@@ -31,7 +28,7 @@ describe("getInputs()", () => {
         expect(got.webhooks).toStrictEqual(["https://env.webhook.invalid"])
         expect(got.status).toBe('success')
         expect(got.description).toBe('')
-        expect(got.title).toBe('')
+        expect(got.title).toBe('github actions')
         expect(got.image).toBe('')
         expect(got.color).toBeFalsy()
         expect(got.username).toBe('')
@@ -78,6 +75,11 @@ describe("getInputs()", () => {
     })
 
     test("all (job)", () => {
+        // this pattern is rare because we have default value
+        // for INPUT_TITLE, defined in action.yml, so this pattern
+        // happens only the user make the option blank manually
+        process.env['INPUT_TITLE'] = ''
+
         process.env['INPUT_NODETAIL'] = 'true'
         process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
         process.env['INPUT_STATUS'] = 'Cancelled'
