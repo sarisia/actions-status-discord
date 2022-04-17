@@ -27,6 +27,6 @@
 	"remoteUser": "node",
 
 	"features": {
-		"fish": "latest"
+		// "fish": "latest"
 	}
 }
