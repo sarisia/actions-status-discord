@@ -5,12 +5,11 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick a Node version: 10, 12, 14
-		"args": { "VARIANT": "14" }
+		"args": { "VARIANT": "16-bullseye" }
 	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -25,5 +24,9 @@
 	"postCreateCommand": "npm i",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node"
+	"remoteUser": "node",
+
+	"features": {
+		// "fish": "latest"
+	}
 }
