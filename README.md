@@ -97,6 +97,8 @@ For `if` parameter, see
 
 #### Advanced usages
 
+| Key | Required | Value | Default | Description |
+| - | - | - | - | - |
 | nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
 | nocontext | No | `true` or `false` | `false` | Set `true` to suppress GitHub context fields (`Repository`, `Ref`, etc). |
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
