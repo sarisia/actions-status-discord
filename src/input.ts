@@ -8,10 +8,12 @@ export interface Inputs {
     title: string
     image: string
     color: number
+    url: string
     username: string
     avatar_url: string
     nocontext: boolean
     noprefix: boolean
+    notimestamp: boolean
 }
 
 interface StatusOption {
@@ -59,10 +61,12 @@ export function getInputs(): Inputs {
         title: (core.getInput('title') || core.getInput('job')).trim(),
         image: core.getInput('image').trim(),
         color: parseInt(core.getInput('color')),
+        url: core.getInput('url').trim(),
         username: core.getInput('username').trim(),
         avatar_url: core.getInput('avatar_url').trim(),
         nocontext: nocontext,
-        noprefix: noprefix
+        noprefix: noprefix,
+        notimestamp: stob(core.getInput('notimestamp'))
     }
 
     // validate

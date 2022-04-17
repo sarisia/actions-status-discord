@@ -28,12 +28,14 @@ describe('getPayload(Inputs)', () => {
     const baseInputs: Inputs = {
         nocontext: false,
         noprefix: false,
+        notimestamp: false,
         webhooks: ['https://webhook.invalid'],
         status: 'success',
         description: '',
         title: '',
         image: '',
         color: NaN,
+        url: '',
         username: '',
         avatar_url: ''
     }
@@ -122,6 +124,64 @@ describe('getPayload(Inputs)', () => {
                 color: 0x28A745,
                 timestamp: expect.any(String),
                 title: "Success: nocontext title"
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("nocontext with notimestamp", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            nocontext: true,
+            notimestamp: true,
+            title: 'nocontext title',
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                title: "Success: nocontext title"
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+
+    test("notimestamp", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            notimestamp: true
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                title: 'Success',
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        inline: true
+                    }
+                ]
             }]
         }
         expect(getPayload(inputs)).toStrictEqual(want)
@@ -223,6 +283,50 @@ describe('getPayload(Inputs)', () => {
                 color: 0x28A745,
                 timestamp: expect.any(String),
                 title: 'Success: job test',
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        inline: true
+                    }
+                ]
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("url", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            title: 'job test',
+            url: "https://example.com"
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                timestamp: expect.any(String),
+                title: 'Success: job test',
+                url: 'https://example.com',
                 fields: [
                     {
                         name: 'Repository',

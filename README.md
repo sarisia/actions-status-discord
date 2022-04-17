@@ -86,11 +86,13 @@ For `if` parameter, see
 | webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>This overrides `env.DISCORD_WEBHOOK`.<br>**DO NOT APPEND [`/github` SUFFIX](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)!** |
 | status | No | `Success`, `Failure` or `Cancelled` | `${{ job.status }}` | See [Document for `job` context](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-context) |
 | title | No | String | `${{ github.workflow}}` | String included in embed title. Overrides `job` input. |
+| url | No | String | | URL linked to embeded title. |
 | description | No | String | | Description included in message |
 | image | No | String | | Image attached to the message |
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color |
 | username | No | String | | Overrides Discord webhook username |
 | avatar_url | No | String | | Overrides Discord webhook avatar url |
+| notime | No | `true` or `false` | `false` | Set `true` to suppress the embeded timestamp. |
 | nofail | No | `true` or `false` | `true` | This action won't make workflow failed by default. If set to `false`, this action will set status failed when failed to notify. |
 | nocontext | No | `true` or `false` | `false` | Set `true` to suppress GitHub context fields (`Repository`, `Ref`, etc). |
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |

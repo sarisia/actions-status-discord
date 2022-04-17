@@ -20,6 +20,7 @@ describe("getInputs()", () => {
         process.env['INPUT_STATUS'] = 'success'
         process.env['INPUT_NOFAIL'] = 'true'
         process.env['INPUT_NODETAIL'] = 'false'
+        process.env['INPUT_NOTIMESTAMP'] = 'false'
 
         process.env['DISCORD_WEBHOOK'] = "https://env.webhook.invalid"
     })

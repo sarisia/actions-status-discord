@@ -26,6 +26,9 @@ inputs:
   color:
     description: "Overrides Discord embed color"
     required: false
+  url:
+    description: "URL to jump when the title is clicked"
+    required: false
   username:
     description: "Overrides Discord webhook username"
     required: false
@@ -48,6 +51,11 @@ inputs:
     description: "Suppress detailed embed fields"
     required: false
     default: 'false'
+  notimestamp:
+    description: "Avoid appending timestamp"
+    required: false
+    default: 'false'
+
 
 runs:
   using: 'node16'

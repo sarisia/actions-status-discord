@@ -54,13 +54,20 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
     const eventDetail = formatEvent(eventName, payload)
 
     let embed: {[key: string]: any} = {
-        color: inputs.color || statusOpts[inputs.status].color,
-        timestamp: (new Date()).toISOString()
+        color: inputs.color || statusOpts[inputs.status].color
+    }
+
+    if (!inputs.notimestamp) {
+        embed.timestamp = (new Date()).toISOString()
     }
 
     // title
     if (inputs.title) {
         embed.title = inputs.title
+    }
+
+    if (inputs.url) {
+        embed.url = inputs.url
     }
 
     if (inputs.image) {
