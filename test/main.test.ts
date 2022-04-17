@@ -28,12 +28,14 @@ describe('getPayload(Inputs)', () => {
     const baseInputs: Inputs = {
         nocontext: false,
         noprefix: false,
+        notimestamp: false,
         webhooks: ['https://webhook.invalid'],
         status: 'success',
         description: '',
         title: '',
         image: '',
         color: NaN,
+        url: '',
         username: '',
         avatar_url: ''
     }

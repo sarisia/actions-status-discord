@@ -57,7 +57,7 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
         color: inputs.color || statusOpts[inputs.status].color
     }
 
-    if (!inputs.notime) {
+    if (!inputs.notimestamp) {
         embed.timestamp = (new Date()).toISOString()
     }
 
