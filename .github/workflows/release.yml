@@ -23,3 +23,63 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
+
+  e2e-all-os:
+    needs: release
+    strategy:
+      max-parallel: 2 # to avoid discord webhook's rate limit
+      matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-22.04
+          - ubuntu-20.04
+          - ubuntu-18.04
+          - windows-latest
+          - windows-2022
+          - windows-2019
+          - macos-latest
+          - macos-12
+          - macos-11
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: Success
+          title: "e2e - ${{ matrix.os }}"
+          description: |
+            testing `tags/v1`, sha is ${{ github.sha }}
+            check `Set up job` step for the sha of the action actually checked out by the runner
+          nofail: false
+          nodetail: false
+          image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
+          color: 0xFFFFFF
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}
+
+  conclude:
+    runs-on: ubuntu-latest
+    needs: e2e-all-os
+    if: always()
+    steps:
+      - uses: actions/github-script@v3
+        id: ghapi
+        with:
+          result-encoding: string
+          script: |
+            const jobs = await github.paginate(
+              github.actions.listJobsForWorkflowRun,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.runId
+              }
+            )
+            return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
+                       .length > 0 ? 'failure' : 'success'
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ steps.ghapi.outputs.result }}
+          title: ${{ github.workflow }} - conclusion
