@@ -31,6 +31,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: read
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - uses: actions/checkout@v3
 
@@ -52,7 +54,6 @@ jobs:
       - name: run-1 (send real Discord message!)
         uses: ./
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "Test running"
           description: "testing commit `${{ github.sha }}`"
           nofail: false
