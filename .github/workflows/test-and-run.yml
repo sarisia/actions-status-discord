@@ -1,0 +1,88 @@
+name: "test"
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  test-unit:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: build
+        uses: devcontainers/ci@v0.2
+        with:
+          imageName: ghcr.io/${{ github.repository }}/devcontainers-ci
+          refFilterForPush: refs/heads/main
+          runCmd: |
+            npm ci
+            npm test
+
+  test-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: build
+        uses: devcontainers/ci@v0.2
+        with:
+          imageName: ghcr.io/${{ github.repository }}/devcontainers-ci
+          push: never
+          runCmd: |
+            npm ci
+            npm run build
+
+      - name: run (send real Discord message!)
+        uses: ./
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "Test running"
+          description: "testing commit `${{ github.sha }}`"
+          nofail: false
+          image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
+          color: 0xFFFFFF
+          username: GitHub Actions
+
+  conclude:
+    runs-on: ubuntu-latest
+    needs: run
+    if: always()
+    steps:
+      - uses: actions/github-script@v3
+        id: ghapi
+        with:
+          result-encoding: string
+          script: |
+            const jobs = await github.paginate(
+              github.actions.listJobsForWorkflowRun,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.runId
+              }
+            )
+            return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
+                       .length > 0 ? 'failure' : 'success'
+
+      - name: report result
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ steps.ghapi.outputs.result }}
+          title: ${{ github.workflow }}
