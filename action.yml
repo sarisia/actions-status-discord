@@ -59,7 +59,7 @@ inputs:
 
 runs:
   using: 'node16'
-  main: 'lib/main.js'
+  main: 'lib/index.js'
 
 branding:
   color: 'blue'

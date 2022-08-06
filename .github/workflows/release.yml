@@ -1,0 +1,25 @@
+name: "release"
+on:
+  release:
+    types:
+      - published
+      - edited
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build and Tag
+        uses: JasonEtco/build-and-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: report result
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
