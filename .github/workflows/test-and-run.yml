@@ -82,7 +82,7 @@ jobs:
       - test-run
     if: always()
     steps:
-      - uses: actions/github-script@v3
+      - uses: actions/github-script@v6
         id: ghapi
         with:
           result-encoding: string

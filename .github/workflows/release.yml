@@ -62,7 +62,7 @@ jobs:
     needs: e2e-all-os
     if: always()
     steps:
-      - uses: actions/github-script@v3
+      - uses: actions/github-script@v6
         id: ghapi
         with:
           result-encoding: string
