@@ -1,14 +1,11 @@
-name: "run-releases-branch-remote"
+name: "e2e-all-os (v1)"
 on:
   workflow_dispatch:
   push:
-    branches:
-      - "releases/v1"
-    tags-ignore:
+    branches-ignore:
       - "**"
-concurrency:
-  group: ${{ github.workflow }}-${{ github.sha }}
-  cancel-in-progress: true
+    tags:
+      - "v1"
 
 jobs:
   run:
@@ -26,21 +23,16 @@ jobs:
           - macos-latest
           - macos-12
           - macos-11
-
     runs-on: ${{ matrix.os }}
-    env:
-      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_VERBOSE }}
     steps:
-      - name: run simple
-        # do not reference as local action! (runs: ./)
-        uses: sarisia/actions-status-discord@releases/v1
-
-      - name: run full
-        uses: sarisia/actions-status-discord@releases/v1
-        with:
-          status: Failure
+      - uses: sarisia/actions-status-discord@v1
+        with: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: 
+          status: Success
           title: "${{ github.workflow }} - ${{ matrix.os }} - must failure"
-          description: "testing `releases/v1` branch"
+          description: |
+            testing `tags/v1`, sha is ${{ github.sha }}
+            check `Set up job` step for the sha of the action actually checked out by the runner
           nofail: false
           nodetail: false
           image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
@@ -48,15 +40,7 @@ jobs:
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
 
-      - name: run nodetail
-        uses: sarisia/actions-status-discord@releases/v1
-        with:
-          status: Cancelled
-          title: "${{ github.workflow }} - ${{ matrix.os }} - no details"
-          nodetail: true
-          nofail: false
-
-  conclusion:
+  conclude:
     runs-on: ubuntu-latest
     needs: run
     if: always()
@@ -81,4 +65,4 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ steps.ghapi.outputs.result }}
-          title: Dry run conclusion
+          title: ${{ github.workflow }} - conclusion
