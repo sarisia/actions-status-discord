@@ -23,7 +23,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     permissions:
-      package: read
+      packages: read
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_VERBOSE }}
     steps:
