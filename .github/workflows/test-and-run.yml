@@ -29,6 +29,8 @@ jobs:
 
   test-run:
     runs-on: ubuntu-latest
+    permissions:
+      packages: read
     steps:
       - uses: actions/checkout@v3
 
@@ -99,4 +101,4 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ steps.ghapi.outputs.result }}
-          title: ${{ github.workflow }}
+          title: ${{ github.workflow }} - conclusion
