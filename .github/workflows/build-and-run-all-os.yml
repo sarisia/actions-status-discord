@@ -1,4 +1,4 @@
-name: "dry-run (universal)"
+name: "build and run (all os)"
 on:
   workflow_dispatch:
   push:
