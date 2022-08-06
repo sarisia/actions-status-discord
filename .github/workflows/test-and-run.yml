@@ -47,7 +47,7 @@ jobs:
             npm ci
             npm run build
 
-      - name: run (send real Discord message!)
+      - name: run-1 (send real Discord message!)
         uses: ./
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -57,6 +57,20 @@ jobs:
           image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
           color: 0xFFFFFF
           username: GitHub Actions
+
+      - name: run-2 (send real Discord message!)
+        # do not reference as local action! (runs: ./)
+        uses: ./
+        with:
+          nofail: false
+
+      - name: run-3 (send real Discord message!)
+        uses: ./
+        with:
+          status: Cancelled
+          title: "test no details"
+          nodetail: true
+          nofail: false
 
   conclude:
     runs-on: ubuntu-latest
