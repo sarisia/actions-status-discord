@@ -26,8 +26,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: sarisia/actions-status-discord@v1
-        with: ${{ secrets.DISCORD_WEBHOOK }}
-          webhook: 
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: Success
           title: "${{ github.workflow }} - ${{ matrix.os }} - must failure"
           description: |

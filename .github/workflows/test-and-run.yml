@@ -76,7 +76,9 @@ jobs:
 
   conclude:
     runs-on: ubuntu-latest
-    needs: run
+    needs:
+      - test-unit
+      - test-run
     if: always()
     steps:
       - uses: actions/github-script@v3
