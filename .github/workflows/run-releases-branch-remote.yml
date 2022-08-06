@@ -1,15 +1,29 @@
-name: "releases/v1 fixed dry-run (full)"
+name: "run-releases-branch-remote"
 on:
   workflow_dispatch:
   push:
     branches:
-      - 'releases/v1'
+      - "releases/v1"
     tags-ignore:
-      - '**'
+      - "**"
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-22.04
+          - ubuntu-20.04
+          - ubuntu-18.04
+          - windows-latest
+          - windows-2022
+          - windows-2019
+          - macos-latest
+          - macos-12
+          - macos-11
+
+    runs-on: ${{ matrix.os }}
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_VERBOSE }}
     steps:
