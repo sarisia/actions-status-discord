@@ -4,9 +4,6 @@
 ARG VARIANT="14-buster"
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
-COPY library-scripts/fish-debian.sh /tmp/library-scripts/
-RUN apt-get update && bash /tmp/library-scripts/fish-debian.sh
-
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
