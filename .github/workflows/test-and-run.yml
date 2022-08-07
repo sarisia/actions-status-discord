@@ -8,7 +8,7 @@ jobs:
   test-unit:
     runs-on: ubuntu-latest
     permissions:
-      packages: write
+      packages: read
     steps:
       - uses: actions/checkout@v3
 
@@ -22,7 +22,7 @@ jobs:
         uses: devcontainers/ci@v0.2
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainers-ci
-          refFilterForPush: refs/heads/main
+          push: never
           runCmd: |
             npm ci
             npm test
