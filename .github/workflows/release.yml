@@ -10,11 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: read
     steps:
       - uses: actions/checkout@v3
 
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: build
+        uses: devcontainers/ci@v0.2
+        with:
+          imageName: ghcr.io/${{ github.repository }}/devcontainers-ci
+          push: never
+          runCmd: |
+            npm ci
+            npm run build
+
       - name: Build and Tag
-        uses: JasonEtco/build-and-tag-action@v1
+        uses: JasonEtco/build-and-tag-action@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
