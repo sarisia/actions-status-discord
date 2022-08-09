@@ -49,7 +49,6 @@ jobs:
           - ubuntu-latest
           - ubuntu-22.04
           - ubuntu-20.04
-          - ubuntu-18.04
           - windows-latest
           - windows-2022
           - windows-2019
