@@ -15,7 +15,7 @@
     "@vercel/ncc": "^0.34.0",
     "jest": "^28.1.3",
     "npm-check-updates": "^16.0.5",
-    "ts-jest": "^28.0.7",
+    "ts-jest": "^28.0.8",
     "typescript": "^4.7.4"
   },
   "dependencies": {
