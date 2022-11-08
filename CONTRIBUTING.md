@@ -2,9 +2,9 @@
 
 ## Release
 
-1. Make **draft** release from `main` branch
+1. Make **pre-release** from `main` branch
 2. Check e2e action result
-3. Edit the release and uncheck draft!
+3. Release again!
 
 ## Update dependencies
 
