@@ -21,7 +21,8 @@ jobs:
       - name: build
         uses: devcontainers/ci@v0.2
         with:
-          imageName: ghcr.io/${{ github.repository }}/devcontainers-ci
+          imageName: ghcr.io/${{ github.repository }}/devcontainer
+          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
           push: never
           runCmd: |
             npm ci
@@ -45,7 +46,8 @@ jobs:
       - name: build
         uses: devcontainers/ci@v0.2
         with:
-          imageName: ghcr.io/${{ github.repository }}/devcontainers-ci
+          imageName: ghcr.io/${{ github.repository }}/devcontainer
+          cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
           push: never
           runCmd: |
             npm ci
