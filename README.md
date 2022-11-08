@@ -1,6 +1,6 @@
 # Actions Status Discord
 
-Discord Notification Made Easy.
+Post GitHub Actions status to Discord as an beautiful embed
 
 ![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
 
@@ -10,18 +10,8 @@ Discord Notification Made Easy.
 
 ---
 
-- [Usage](#usage)
-- [Configuration](#configuration)
-  - [Environment Variables](#environment-variables)
-  - [Inputs](#inputs)
-- [Tips](#tips)
-- [FAQ](#faq)
-- [Questions? Bugs?](#questions-bugs)
-
 > :warning: If you're reading this document in master branch,
 > please refer to the [latest released document here](https://github.com/marketplace/actions/actions-status-discord). 
-
-<!-- * [Migrate to v2](#migrate-to-v2) -->
 
 ## Usage
 
@@ -163,13 +153,6 @@ workflow status to `Failure`.
 
 As [Guilded](https://guilded.gg) supports [Discord Webhooks API](https://discord.com/developers/docs/resources/webhook#execute-webhook),
 you can use Guilded webhook endpoint in the same way as Discord webhook.
-
-<details>
-<summary>Guilded Embed Image</summary>
-
-<img width="431" alt="Screen Shot 2020-05-14 at 11 44 21" src="https://user-images.githubusercontent.com/33576079/81886777-841a1d80-95d8-11ea-9878-c3c10ab6f21b.png">
-
-</details>
 
 ## FAQ
 
