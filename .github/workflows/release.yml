@@ -58,14 +58,18 @@ jobs:
           - macos-11
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: sarisia/actions-status-discord@v1
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }}
+          
+      - uses: ./
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: Success
-          title: "e2e - ${{ matrix.os }}"
+          title: "e2e - ${{ github.ref_name }} - ${{ matrix.os }}"
           description: |
-            testing `tags/v1`, sha is ${{ github.sha }}
-            check `Set up job` step for the sha of the action actually checked out by the runner
+            Tag: `${{ github.ref_name }}`
+            Build atrifact SHA: `${{ github.sha }}`
           nofail: false
           nodetail: false
           image: "https://user-images.githubusercontent.com/33576079/81886735-69e03f80-95d8-11ea-8828-fa10dda8afd1.png"
