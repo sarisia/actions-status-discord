@@ -36,6 +36,11 @@ jobs:
         uses: sarisia/build-and-tag-action@86c2f7fbe7691ec3529884d45038295c0aa3ce35
         env:
           GITHUB_TOKEN: ${{ github.token }}
+        with:
+          commit_message: |
+            Automatic build
+            Commit ${{github.sha}}
+            Run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
       - name: report result
         uses: sarisia/actions-status-discord@9d12cc6d7c8d55f9cbe5efa643117f8c7423f4cf
