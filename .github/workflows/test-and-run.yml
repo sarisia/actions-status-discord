@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: read
+      contents: read
     steps:
       - uses: actions/checkout@v3
 
@@ -32,6 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: read
+      contents: read
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
@@ -83,6 +85,8 @@ jobs:
       - test-unit
       - test-run
     if: always()
+    permissions:
+      actions: read
     steps:
       - uses: actions/github-script@v3
         id: ghapi
