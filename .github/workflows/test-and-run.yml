@@ -88,26 +88,13 @@ jobs:
     permissions:
       actions: read
     steps:
-      - uses: actions/github-script@f05a81df23035049204b043b50c3322045ce7eb3
+      - uses: sarisia/actions/conclusion@main
         id: ghapi
-        with:
-          result-encoding: string
-          script: |
-            const jobs = await github.paginate(
-              github.actions.listJobsForWorkflowRun,
-              {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                run_id: context.runId
-              }
-            )
-            return jobs.filter(job => job.conclusion !== null && job.conclusion !== "success")
-                       .length > 0 ? 'failure' : 'success'
 
       - name: report result
         uses: sarisia/actions-status-discord@9d12cc6d7c8d55f9cbe5efa643117f8c7423f4cf
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ steps.ghapi.outputs.result }}
+          status: ${{ steps.ghapi.outputs.conclusion }}
           title: ${{ github.workflow }} - conclusion
