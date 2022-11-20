@@ -1,15 +1,15 @@
-name: "update devcontainer"
+name: update devcontainer
 on:
   workflow_dispatch:
   push:
     branches:
-      - "main"
+      - main
     tags-ignore:
-      - "**"
+      - '**'
     paths:
-      - ".devcontainer/**"
+      - '.devcontainer/**'
   schedule:
-    - cron: "30 2 * * 3" # At 02:30 on Wednesday (weekly)
+    - cron: '30 2 * * 3' # At 02:30 on Wednesday (weekly)
 
 jobs:
   build:
@@ -18,15 +18,4 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
-
-      - uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
-
-      - uses: devcontainers/ci@3dcee0e5dada9275fbd8e4d76ee9de43998be886
-        with:
-          imageName: ghcr.io/${{ github.repository }}/devcontainer
-          push: always
+      - uses: sarisia/actions/update-devcontainer@main
