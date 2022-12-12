@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.2.2",
-    "@vercel/ncc": "^0.34.0",
+    "@vercel/ncc": "^0.36.0",
     "jest": "^29.3.0",
     "npm-check-updates": "^16.3.18",
     "ts-jest": "^29.0.3",
