@@ -3,7 +3,8 @@ import { logWarning, stob } from './utils'
 
 export interface Inputs {
     webhooks: string[]
-    status:string
+    status: string
+    content: string
     description: string
     title: string
     image: string
@@ -45,7 +46,7 @@ export function getInputs(): Inputs {
         core.setSecret(w)
         // if webhook has `/github` suffix, warn them (do not auto-fix)
         if (w.endsWith('/github')) {
-            logWarning(`webhook ${i+1}/${webhooks.length} has \`/github\` suffix! This may cause errors.`)
+            logWarning(`webhook ${i + 1}/${webhooks.length} has \`/github\` suffix! This may cause errors.`)
         }
     })
 
@@ -54,9 +55,10 @@ export function getInputs(): Inputs {
     const nocontext = nodetail || stob(core.getInput('nocontext'))
     const noprefix = nodetail || stob(core.getInput('noprefix'))
 
-    const inputs: Inputs =  {
+    const inputs: Inputs = {
         webhooks: webhooks,
         status: core.getInput('status').trim().toLowerCase(),
+        content: core.getInput('content').trim(),
         description: core.getInput('description').trim(),
         title: (core.getInput('title') || core.getInput('job')).trim(),
         image: core.getInput('image').trim(),

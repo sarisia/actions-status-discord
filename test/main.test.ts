@@ -32,6 +32,7 @@ describe('getPayload(Inputs)', () => {
         webhooks: ['https://webhook.invalid'],
         status: 'success',
         description: '',
+        content: '',
         title: '',
         image: '',
         color: NaN,
@@ -527,6 +528,49 @@ describe('getPayload(Inputs)', () => {
                 ]
             }],
             avatar_url: "https://avatar.invalid/avatar.png"
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("content", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            content: "hey i'm mentioning <@316911818725392384>"
+        }
+        const want = {
+            embeds: [{
+                color: 0x28A745,
+                timestamp: expect.any(String),
+                title: 'Success',
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        inline: true
+                    }
+                ]
+            }],
+            content: "hey i'm mentioning <@316911818725392384>"
         }
         expect(getPayload(inputs)).toStrictEqual(want)
     })

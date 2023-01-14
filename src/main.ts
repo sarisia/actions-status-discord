@@ -4,7 +4,7 @@ import axios from 'axios'
 import { formatEvent } from './format'
 import { getInputs, Inputs, statusOpts } from './input'
 import { logDebug, logError, logInfo } from './utils'
-import { fitEmbed } from './validate'
+import { fitContent, fitEmbed } from './validate'
 
 async function run() {
     try {
@@ -14,21 +14,21 @@ async function run() {
         logInfo('Generating payload...')
         const payload = getPayload(inputs)
         startGroup('Dump payload')
-            logInfo(JSON.stringify(payload, null, 2))
+        logInfo(JSON.stringify(payload, null, 2))
         endGroup()
 
-        logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length>1 ? 's' : ''}...`)
+        logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length > 1 ? 's' : ''}...`)
         await Promise.all(inputs.webhooks.map(w => wrapWebhook(w.trim(), payload)))
-    } catch(e: any) {
+    } catch (e: any) {
         logError(`Unexpected failure: ${e} (${e.message})`)
     }
 }
 
 function wrapWebhook(webhook: string, payload: Object): Promise<void> {
-    return async function() {
+    return async function () {
         try {
             await axios.post(webhook, payload)
-        } catch(e: any) {
+        } catch (e: any) {
             if (e.response) {
                 logError(`Webhook response: ${e.response.status}: ${JSON.stringify(e.response.data)}`)
             } else {
@@ -53,7 +53,7 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
     const eventFieldTitle = `Event - ${eventName}`
     const eventDetail = formatEvent(eventName, payload)
 
-    let embed: {[key: string]: any} = {
+    let embed: { [key: string]: any } = {
         color: inputs.color || statusOpts[inputs.status].color
     }
 
@@ -124,6 +124,9 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
     }
     if (inputs.avatar_url) {
         discord_payload.avatar_url = inputs.avatar_url
+    }
+    if (inputs.content) {
+        discord_payload.content = fitContent(inputs.content)
     }
 
     return discord_payload
