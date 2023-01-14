@@ -2,7 +2,7 @@
 
 Post GitHub Actions status to Discord as an beautiful embed
 
-![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
+![image](https://user-images.githubusercontent.com/33576079/212482263-31456af9-6a9f-4110-82ad-cd3df738bddb.png)
 
 - :sushi: **_Zero-configuration!_** Works perfectly out of the box.
 - :sushi: **_Universal!_** Supports Linux (Ubuntu), macOS and Windows runners.
@@ -24,7 +24,7 @@ Post GitHub Actions status to Discord as an beautiful embed
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
 ```
 
-![image](https://user-images.githubusercontent.com/33576079/102154007-d6e3ec80-3ebb-11eb-9389-f372954813c5.png)
+![image](https://user-images.githubusercontent.com/33576079/212482274-7d4ee492-69b5-4d61-844d-b1af05e4380a.png)
 
 ### Full options
 
@@ -44,7 +44,7 @@ Post GitHub Actions status to Discord as an beautiful embed
     avatar_url: ${{ secrets.AVATAR_URL }}
 ```
 
-![image](https://user-images.githubusercontent.com/33576079/102154036-ecf1ad00-3ebb-11eb-9af3-ff58982d9ecb.png)
+![image](https://user-images.githubusercontent.com/33576079/212482303-c5813211-95be-4599-ac3d-e93cdd6d33c5.png)
 
 ### No detail
 
@@ -59,7 +59,7 @@ Post GitHub Actions status to Discord as an beautiful embed
     color: 0xff91a4
 ```
 
-![image](https://user-images.githubusercontent.com/33576079/102154072-009d1380-3ebc-11eb-9fe9-24d35a0e1e7b.png)
+![image](https://user-images.githubusercontent.com/33576079/212482315-52429bbd-b7b9-456a-8ee8-ee26aa2a0fb1.png)
 
 For `if` parameter, see
 [GitHub Actions Reference](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions)
@@ -134,7 +134,7 @@ Some fields support markdown syntax.
       Click [here](https://github.com/sarisia/actions-status-discord) to download!
 ```
 
-![image](https://user-images.githubusercontent.com/33576079/102154106-0f83c600-3ebc-11eb-9b4e-b8a90afae4db.png)
+![image](https://user-images.githubusercontent.com/33576079/212482315-52429bbd-b7b9-456a-8ee8-ee26aa2a0fb1.png)
 
 ### Mention to user/role
 
