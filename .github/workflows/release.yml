@@ -50,7 +50,7 @@ jobs:
           git push origin $TAGNAME
 
       - name: report result
-        uses: sarisia/actions-status-discord@9d12cc6d7c8d55f9cbe5efa643117f8c7423f4cf
+        uses: sarisia/actions-status-discord@5761d8366a3897fb8941243ce66b9a9ae16af872
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -104,7 +104,7 @@ jobs:
       - uses: sarisia/actions/conclusion@main
         id: ghapi
 
-      - uses: sarisia/actions-status-discord@9d12cc6d7c8d55f9cbe5efa643117f8c7423f4cf
+      - uses: sarisia/actions-status-discord@5761d8366a3897fb8941243ce66b9a9ae16af872
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
