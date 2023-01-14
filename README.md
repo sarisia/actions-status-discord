@@ -33,10 +33,13 @@ Post GitHub Actions status to Discord as an beautiful embed
   if: always()
   with:
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
+    status: ${{ job.status }}
+    content: "Hey <@316911818725392384>"
     title: "deploy"
     description: "Build and deploy to GitHub Pages"
     image: ${{ secrets.EMBED_IMAGE }}
     color: 0x0000ff
+    url: "https://github.com/sarisia/actions-status-discord"
     username: GitHub Actions
     avatar_url: ${{ secrets.AVATAR_URL }}
 ```
