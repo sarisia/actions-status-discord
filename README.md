@@ -77,6 +77,7 @@ For `if` parameter, see
 | - | - | - | - | - |
 | webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>This overrides `env.DISCORD_WEBHOOK`.<br>**DO NOT APPEND [`/github` SUFFIX](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)!** |
 | status | No | `Success`, `Failure` or `Cancelled` | `${{ job.status }}` | See [Document for `job` context](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-context) |
+| content | No | String | | Content. Shown as an message outside of the embed. See [Mention to user/role](#mention-to-user/role) |
 | title | No | String | `${{ github.workflow}}` | String included in embed title. Overrides `job` input. |
 | description | No | String | | Description included in message |
 | image | No | String | | Image attached to the message |
@@ -131,6 +132,21 @@ Some fields support markdown syntax.
 ```
 
 ![image](https://user-images.githubusercontent.com/33576079/102154106-0f83c600-3ebc-11eb-9b4e-b8a90afae4db.png)
+
+### Mention to user/role
+
+Since `@mention` inside the embed does not generate ping to users,
+you can use `content` input to mention users/roles:
+
+```yaml
+- uses: sarisia/actions-status-discord@v1
+  if: always()
+  with:
+    webhook: ${{ secrets.DISCORD_WEBHOOK }}
+    content: "Hey <@316911818725392384>"
+```
+
+See the [Discord Developer Docs](https://discord.com/developers/docs/reference#message-formatting) for available formats.
 
 ### Trigger multiple webhooks
 

@@ -2,7 +2,7 @@ import * as constants from './constants'
 import { logWarning } from './utils'
 
 export function truncStr(msg: string, length: number) {
-    return msg.slice(0, length-3) + '...'
+    return msg.slice(0, length - 3) + '...'
 }
 
 export function fitEmbed(embed: any): any {
@@ -36,4 +36,14 @@ export function fitEmbed(embed: any): any {
     }
 
     return embed
+}
+
+export function fitContent(content: string): string {
+    const contentLen = content.length
+    if (contentLen > constants.MAX_WEBHOOK_CONTENT_LENGTH) {
+        logWarning(`content field must be shorter than ${constants.MAX_WEBHOOK_CONTENT_LENGTH}, got ${contentLen}\n    ${content}`)
+        content = truncStr(content, constants.MAX_WEBHOOK_CONTENT_LENGTH)
+    }
+
+    return content
 }

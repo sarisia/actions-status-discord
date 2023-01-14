@@ -7,7 +7,7 @@ describe("getInputs()", () => {
             if (prop.startsWith("INPUT_"))
                 delete process.env[prop]
         }
-        
+
         // see action.yml for default values
         process.env['INPUT_STATUS'] = 'success'
         process.env['INPUT_TITLE'] = 'github actions'
@@ -27,6 +27,7 @@ describe("getInputs()", () => {
         expect(got.nocontext).toBe(false)
         expect(got.webhooks).toStrictEqual(["https://env.webhook.invalid"])
         expect(got.status).toBe('success')
+        expect(got.content).toBe('')
         expect(got.description).toBe('')
         expect(got.title).toBe('github actions')
         expect(got.image).toBe('')
@@ -83,6 +84,7 @@ describe("getInputs()", () => {
         process.env['INPUT_NODETAIL'] = 'true'
         process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
         process.env['INPUT_STATUS'] = 'Cancelled'
+        process.env['INPUT_CONTENT'] = "\n\nhey i'm mentioning \n<@316911818725392384>\n"
         process.env['INPUT_DESCRIPTION'] = 'description text'
         process.env['INPUT_JOB'] = 'job text\n\n\n\n\n'
         process.env['INPUT_COLOR'] = '0xffffff'
@@ -97,6 +99,7 @@ describe("getInputs()", () => {
             'https://input2.webhook.invalid'
         ])
         expect(got.status).toBe('cancelled')
+        expect(got.content).toBe("hey i'm mentioning \n<@316911818725392384>")
         expect(got.description).toBe('description text')
         expect(got.title).toBe('job text')
         expect(got.color).toBe(0xffffff)
@@ -108,6 +111,7 @@ describe("getInputs()", () => {
         process.env['INPUT_NODETAIL'] = 'true'
         process.env['INPUT_WEBHOOK'] = '\nhttps://input.webhook.invalid\n\n\nhttps://input2.webhook.invalid\n\n\n'
         process.env['INPUT_STATUS'] = 'Cancelled'
+        process.env['INPUT_CONTENT'] = "\n\nhey i'm mentioning \n<@316911818725392384>\n"
         process.env['INPUT_DESCRIPTION'] = 'description text'
         process.env['INPUT_TITLE'] = 'job text\n\n\n\n\n'
         process.env['INPUT_IMAGE'] = '\n\nhttps://example.com/inputimage.png'
@@ -123,6 +127,7 @@ describe("getInputs()", () => {
             'https://input2.webhook.invalid'
         ])
         expect(got.status).toBe('cancelled')
+        expect(got.content).toBe("hey i'm mentioning \n<@316911818725392384>")
         expect(got.description).toBe('description text')
         expect(got.title).toBe('job text')
         expect(got.image).toBe('https://example.com/inputimage.png')

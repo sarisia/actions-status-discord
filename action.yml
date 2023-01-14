@@ -1,6 +1,6 @@
-name: 'Actions Status Discord'
-description: 'Post Github Actions CI status to Discord'
-author: 'Sarisia'
+name: "Actions Status Discord"
+description: "Post Github Actions CI status to Discord"
+author: "Sarisia"
 
 inputs:
   webhook:
@@ -12,6 +12,9 @@ inputs:
     default: ${{ job.status }}
   job:
     description: "Deprecated. Job name included in message title. Same as title input."
+    required: false
+  content:
+    description: "Content. Shown as an message outside of the embed. See [Mention to user/role](#mention-to-user-role)"
     required: false
   title:
     description: "String included in embed title. Overrides job input."
@@ -38,29 +41,28 @@ inputs:
   nofail:
     description: "This action won't make workflow failed by default."
     required: false
-    default: 'true'
+    default: "true"
   nocontext:
     description: "Suppress GitHub context fields"
     required: false
-    default: 'false'
+    default: "false"
   noprefix:
     description: "Avoid appending job status to title"
     required: false
-    default: 'false'
+    default: "false"
   nodetail:
     description: "Suppress detailed embed fields"
     required: false
-    default: 'false'
+    default: "false"
   notimestamp:
     description: "Avoid appending timestamp"
     required: false
-    default: 'false'
-
+    default: "false"
 
 runs:
-  using: 'node16'
-  main: 'lib/index.js'
+  using: "node16"
+  main: "lib/index.js"
 
 branding:
-  color: 'blue'
-  icon: 'send'
+  color: "blue"
+  icon: "send"
