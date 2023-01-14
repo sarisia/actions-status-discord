@@ -59,6 +59,7 @@ jobs:
       - name: run-1 (send real Discord message!)
         uses: ./
         with:
+          content: "hey <@316911818725392384>"
           title: "Test running"
           description: "testing commit `${{ github.sha }}`"
           nofail: false

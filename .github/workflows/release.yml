@@ -31,7 +31,7 @@ jobs:
             npm run build
 
       - name: Build and Tag
-        # temporary use own fork until 
+        # temporary use own fork until
         # uses: JasonEtco/build-and-tag-action@v2
         uses: sarisia/build-and-tag-action@86c2f7fbe7691ec3529884d45038295c0aa3ce35
         env:
@@ -77,11 +77,12 @@ jobs:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
         with:
           ref: ${{ github.ref_name }}
-          
+
       - uses: ./
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: Success
+          content: "hey <@316911818725392384>"
           title: "e2e - ${{ github.ref_name }} - ${{ matrix.os }}"
           description: |
             Tag: `${{ github.ref_name }}`
@@ -102,7 +103,7 @@ jobs:
     steps:
       - uses: sarisia/actions/conclusion@main
         id: ghapi
-        
+
       - uses: sarisia/actions-status-discord@9d12cc6d7c8d55f9cbe5efa643117f8c7423f4cf
         if: always()
         with:
