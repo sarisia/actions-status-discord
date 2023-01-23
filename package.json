@@ -11,7 +11,7 @@
   "author": "Sarisia",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^29.2.5",
+    "@types/jest": "^29.2.6",
     "@vercel/ncc": "^0.36.0",
     "jest": "^29.3.1",
     "npm-check-updates": "^16.6.2",
