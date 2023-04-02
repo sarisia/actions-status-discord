@@ -14,7 +14,7 @@ jest.mock('@actions/github', () => {
             ref: 'refs/tags/simple-tag',
             workflow: 'push-ci',
             actor: 'Codertocat',
-            runId: 123123,
+            runNumber: 123123,
             serverUrl: "https://githubactions.serverurl.example.com",
 
             repo: {

@@ -41,9 +41,9 @@ function wrapWebhook(webhook: string, payload: Object): Promise<void> {
 export function getPayload(inputs: Readonly<Inputs>): Object {
     const ctx = github.context
     const { owner, repo } = ctx.repo
-    const { eventName, ref, workflow, actor, payload, serverUrl, runId } = ctx
+    const { eventName, ref, workflow, actor, payload, serverUrl, runNumber } = ctx
     const repoURL = `${serverUrl}/${owner}/${repo}`
-    const workflowURL = `${repoURL}/actions/runs/${runId}`
+    const workflowURL = `${repoURL}/actions/runs/${runNumber}`
 
     logDebug(JSON.stringify(payload))
 
