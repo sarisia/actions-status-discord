@@ -41,12 +41,9 @@ function wrapWebhook(webhook: string, payload: Object): Promise<void> {
 export function getPayload(inputs: Readonly<Inputs>): Object {
     const ctx = github.context
     const { owner, repo } = ctx.repo
-    const { eventName, sha, ref, workflow, actor, payload } = ctx
-    const repoURL = `https://github.com/${owner}/${repo}`
-    // if the trigger is pull_request, check `github.event.pull_request.head.sha` first.
-    // see issues/132
-    const validSHA = ctx.payload.pull_request?.head?.sha || sha
-    const workflowURL = `${repoURL}/commit/${validSHA}/checks`
+    const { eventName, ref, workflow, actor, payload, serverUrl, runId } = ctx
+    const repoURL = `${serverUrl}/${owner}/${repo}`
+    const workflowURL = `${repoURL}/actions/runs/${runId}`
 
     logDebug(JSON.stringify(payload))
 

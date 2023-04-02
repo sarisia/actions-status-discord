@@ -2,19 +2,25 @@ import { formatEvent } from '../src/format'
 import { Inputs } from '../src/input'
 import { getPayload } from '../src/main'
 
+// see https://github.com/actions/toolkit/blob/457303960f03375db6f033e214b9f90d79c3fe5c/packages/github/src/context.ts
+// and https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 jest.mock('@actions/github', () => {
     return {
         context: {
-            repo: {
-                owner: 'Codertocat',
-                repo: 'Hello-World'
-            },
+            payload: require('./payload/push_tag.json'),
+
             eventName: 'push',
             sha: '6113728f27ae82c7b1a177c8d03f9e96e0adf246',
             ref: 'refs/tags/simple-tag',
             workflow: 'push-ci',
             actor: 'Codertocat',
-            payload: require('./payload/push_tag.json')
+            runId: 123123,
+            serverUrl: "https://githubactions.serverurl.example.com",
+
+            repo: {
+                owner: 'Codertocat',
+                repo: 'Hello-World'
+            },
 
         }
     }
@@ -53,7 +59,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -73,7 +79,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -159,7 +165,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -179,7 +185,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -202,7 +208,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -222,7 +228,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -245,7 +251,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -265,7 +271,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -287,7 +293,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -307,7 +313,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -331,7 +337,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -351,7 +357,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -376,7 +382,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -396,7 +402,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -417,7 +423,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -437,7 +443,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -459,7 +465,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -479,7 +485,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -502,7 +508,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -522,7 +528,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
@@ -545,7 +551,7 @@ describe('getPayload(Inputs)', () => {
                 fields: [
                     {
                         name: 'Repository',
-                        value: '[Codertocat/Hello-World](https://github.com/Codertocat/Hello-World)',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
                         inline: true
                     },
                     {
@@ -565,7 +571,7 @@ describe('getPayload(Inputs)', () => {
                     },
                     {
                         name: 'Workflow',
-                        value: "[push-ci](https://github.com/Codertocat/Hello-World/commit/6113728f27ae82c7b1a177c8d03f9e96e0adf246/checks)",
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
                         inline: true
                     }
                 ]
