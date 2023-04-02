@@ -5,7 +5,7 @@ Post GitHub Actions status to Discord as an beautiful embed
 ![image](https://user-images.githubusercontent.com/33576079/212482263-31456af9-6a9f-4110-82ad-cd3df738bddb.png)
 
 - :sushi: **_Zero-configuration!_** Works perfectly out of the box.
-- :sushi: **_Universal!_** Supports Linux (Ubuntu), macOS and Windows runners.
+- :sushi: **_OS-agnostic!_** Supports Linux (Ubuntu), macOS and Windows runners.
 - :sushi: **_Fast startup!_** Faster than ones written as Docker container action.
 
 ---
@@ -167,6 +167,12 @@ If some of these webhooks are failed, other deliveries will **NOT** be cancelled
 
 If the option `nofail` is set to `false` and any of one fail, the action will set
 workflow status to `Failure`.
+
+### GHES, Gitea and Forgejo
+
+This actions may work with [GHES](https://docs.github.com/en/enterprise-server@3.8/admin/github-actions/managing-access-to-actions-from-githubcom/about-using-actions-in-your-enterprise), [Gitea](https://blog.gitea.io/2022/12/feature-preview-gitea-actions/) and [Forgejo](https://forgejo.org/2023-02-27-forgejo-actions/), but not tested against yet.
+
+If you have any issues, please let us know in Discussions or Issues.
 
 ### Guilded webhook support
 
