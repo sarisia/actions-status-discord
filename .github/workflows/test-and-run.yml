@@ -94,7 +94,7 @@ jobs:
         id: ghapi
 
       - name: report result
-        uses: sarisia/actions-status-discord@61114b793b460ee85fe38ad3fccc78c7ead38d55
+        uses: sarisia/actions-status-discord@82409b24a08684f54ea5baa6b376e36dad37fb81
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
