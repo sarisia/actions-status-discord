@@ -12,16 +12,16 @@ jobs:
       packages: read
       contents: read
     steps:
-      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
 
-      - uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      - uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: build
-        uses: devcontainers/ci@72700878095f87b851a6c4405a16056caffdc577
+        uses: devcontainers/ci@57eaf0c9b518a76872bc429cdceefd65a912309b
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainer
           cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
@@ -38,16 +38,16 @@ jobs:
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
-      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
 
-      - uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      - uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: build
-        uses: devcontainers/ci@72700878095f87b851a6c4405a16056caffdc577
+        uses: devcontainers/ci@57eaf0c9b518a76872bc429cdceefd65a912309b
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainer
           cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
@@ -94,7 +94,7 @@ jobs:
         id: ghapi
 
       - name: report result
-        uses: sarisia/actions-status-discord@61114b793b460ee85fe38ad3fccc78c7ead38d55
+        uses: sarisia/actions-status-discord@82409b24a08684f54ea5baa6b376e36dad37fb81
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
