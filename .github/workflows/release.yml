@@ -68,6 +68,7 @@ jobs:
           - windows-2022
           - windows-2019
           - macos-latest
+          - macos-13
           - macos-12
           - macos-11
     runs-on: ${{ matrix.os }}
