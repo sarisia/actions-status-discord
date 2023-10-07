@@ -1,1 +1,1 @@
-FROM mcr.microsoft.com/devcontainers/javascript-node:16-bullseye
+FROM mcr.microsoft.com/devcontainers/javascript-node:20-bullseye
