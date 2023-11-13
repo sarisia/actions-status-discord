@@ -11,7 +11,7 @@ jobs:
       packages: read
       contents: read
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       - uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
         with:
@@ -20,7 +20,7 @@ jobs:
           password: ${{ github.token }}
 
       - name: build
-        uses: devcontainers/ci@57eaf0c9b518a76872bc429cdceefd65a912309b
+        uses: devcontainers/ci@c3e31cc561800ac318ed000e22ffc6713c93d009
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainer
           cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
@@ -31,7 +31,7 @@ jobs:
             npm run build
 
       - name: report result
-        uses: sarisia/actions-status-discord@82409b24a08684f54ea5baa6b376e36dad37fb81
+        uses: sarisia/actions-status-discord@9904e3130b8905d5b973df25623f17672dcb3466
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
