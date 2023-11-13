@@ -21,7 +21,7 @@ jobs:
           password: ${{ github.token }}
 
       - name: build
-        uses: devcontainers/ci@57eaf0c9b518a76872bc429cdceefd65a912309b
+        uses: devcontainers/ci@c3e31cc561800ac318ed000e22ffc6713c93d009
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainer
           cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
