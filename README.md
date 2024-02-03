@@ -4,9 +4,9 @@ Post GitHub Actions status to Discord as an beautiful embed
 
 ![image](https://user-images.githubusercontent.com/33576079/212482263-31456af9-6a9f-4110-82ad-cd3df738bddb.png)
 
-- :sushi: **_Zero-configuration!_** Works perfectly out of the box.
-- :sushi: **_OS-agnostic!_** Supports Linux (Ubuntu), macOS and Windows runners.
-- :sushi: **_Fast startup!_** Faster than ones written as Docker container action.
+- :sushi: **_Super Easy!_** Works perfectly out of the box.
+- :sushi: **_OS & Arch-agnostic!_** Supports Linux (Ubuntu), macOS (Intel, M1) and Windows runners.
+- :sushi: **_Fast!_** Faster than ones written as Docker container action.
 
 ---
 
