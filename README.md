@@ -179,6 +179,24 @@ If you have any issues, please let us know in Discussions or Issues.
 As [Guilded](https://guilded.gg) supports [Discord Webhooks API](https://discord.com/developers/docs/resources/webhook#execute-webhook),
 you can use Guilded webhook endpoint in the same way as Discord webhook.
 
+### Verifying Artifact Attestations
+
+This action is shipped with [Artifact attestations](https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds#about-verifying-artifact-attestations)
+for `action.yml` and `lib/index.js`.
+
+You can verify these files with [GitHub CLI](https://cli.github.com/):
+
+```
+$ gh attestation verify --repo sarisia/actions-status-discord lib/index.js
+Loaded digest sha256:4cc20dac6053670b29ff3ae8b9ddeafeed73fe79e5ab31fd8e34b6acd44d30c3 for file://lib/index.js
+Loaded 1 attestation from GitHub API
+✓ Verification succeeded!
+
+sha256:4cc20dac6053670b29ff3ae8b9ddeafeed73fe79e5ab31fd8e34b6acd44d30c3 was attested by:
+REPO                            PREDICATE_TYPE                  WORKFLOW                                              
+sarisia/actions-status-discord  https://slsa.dev/provenance/v1  .github/workflows/release.yml@refs/tags/v.1.14.3-pre.0
+```
+
 ## FAQ
 
 ### `Error: Webhook response: 400: {"sender":["This field is required"]}`
