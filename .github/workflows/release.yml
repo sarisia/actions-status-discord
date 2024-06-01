@@ -15,9 +15,9 @@ jobs:
       attestations: write
       
     steps:
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
 
-      - uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20
+      - uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -34,12 +34,12 @@ jobs:
             npm run build
 
       - name: generate artifact attestation for action.yml
-        uses: actions/attest-build-provenance@897ed5eab6ed058a474202017ada7f40bfa52940
+        uses: actions/attest-build-provenance@173725a1209d09b31f9d30a3890cf2757ebbff0d
         with:
           subject-path: action.yml
 
       - name: generate artifact attestation for lib/index.js
-        uses: actions/attest-build-provenance@897ed5eab6ed058a474202017ada7f40bfa52940
+        uses: actions/attest-build-provenance@173725a1209d09b31f9d30a3890cf2757ebbff0d
         with:
           subject-path: lib/index.js
 
@@ -63,7 +63,7 @@ jobs:
           git push origin $TAGNAME
 
       - name: report result
-        uses: sarisia/actions-status-discord@6712a17f7d0531d44cd42ca2a878b0bdfd07b62a
+        uses: sarisia/actions-status-discord@4138d2d190a466c986fe9842407284d9fc3e7793
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -89,7 +89,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
         with:
           ref: ${{ github.ref_name }}
 
@@ -119,7 +119,7 @@ jobs:
       - uses: sarisia/actions/conclusion@main
         id: ghapi
 
-      - uses: sarisia/actions-status-discord@6712a17f7d0531d44cd42ca2a878b0bdfd07b62a
+      - uses: sarisia/actions-status-discord@4138d2d190a466c986fe9842407284d9fc3e7793
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
