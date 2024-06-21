@@ -13,7 +13,7 @@ jobs:
       packages: read
       id-token: write
       attestations: write
-      
+
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
 
@@ -75,6 +75,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+          - ubuntu-24.04
           - ubuntu-22.04
           - ubuntu-20.04
           - windows-latest
