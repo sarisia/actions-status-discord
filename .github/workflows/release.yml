@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
 
-      - uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446
+      - uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -34,12 +34,12 @@ jobs:
             npm run build
 
       - name: generate artifact attestation for action.yml
-        uses: actions/attest-build-provenance@bdd51370e0416ac948727f861e03c2f05d32d78e
+        uses: actions/attest-build-provenance@210c1913531870065f03ce1f9440dd87bc0938cd
         with:
           subject-path: action.yml
 
       - name: generate artifact attestation for lib/index.js
-        uses: actions/attest-build-provenance@bdd51370e0416ac948727f861e03c2f05d32d78e
+        uses: actions/attest-build-provenance@210c1913531870065f03ce1f9440dd87bc0938cd
         with:
           subject-path: lib/index.js
 
@@ -63,7 +63,7 @@ jobs:
           git push origin $TAGNAME
 
       - name: report result
-        uses: sarisia/actions-status-discord@609229a5cc8b81e6de55f63e6cdd5e171a3c1895
+        uses: sarisia/actions-status-discord@448a59224349c2bf9611e68b88787f2b0011965f
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -119,7 +119,7 @@ jobs:
       - uses: sarisia/actions/conclusion@main
         id: ghapi
 
-      - uses: sarisia/actions-status-discord@609229a5cc8b81e6de55f63e6cdd5e171a3c1895
+      - uses: sarisia/actions-status-discord@448a59224349c2bf9611e68b88787f2b0011965f
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
