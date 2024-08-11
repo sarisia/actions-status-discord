@@ -54,7 +54,7 @@ Post GitHub Actions status to Discord as an beautiful embed
   with:
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
     nodetail: true
-    title: "New version of `software` is ready!
+    title: "New version of `software` is ready!"
     description: |
       Version `${{ github.event.release.tag_name }}`
       Click [here]( ${{github.event.repository.html_url }}/releases/tag/${{ github.event.release.tag_name }}) to download!
