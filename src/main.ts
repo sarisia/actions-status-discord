@@ -51,7 +51,7 @@ export function getPayload(inputs: Readonly<Inputs>): Object {
     const eventDetail = formatEvent(eventName, payload)
 
     let embed: { [key: string]: any } = {
-        color: inputs.color || statusOpts[inputs.status].color
+        color: inputs.color === undefined ? statusOpts[inputs.status].color : inputs.color
     }
 
     if (!inputs.notimestamp) {

@@ -41,7 +41,7 @@ describe('getPayload(Inputs)', () => {
         content: '',
         title: '',
         image: '',
-        color: NaN,
+        color: undefined,
         url: '',
         username: '',
         avatar_url: ''
@@ -451,6 +451,91 @@ describe('getPayload(Inputs)', () => {
         }
         expect(getPayload(inputs)).toStrictEqual(want)
     })
+
+    test("no color defaults to job status color", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            status: "failure"
+        }
+        const want = {
+            embeds: [{
+                color: 0xCB2431,
+                timestamp: expect.any(String),
+                title: 'Failure',
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
+                        inline: true
+                    }
+                ]
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
+    test("color 0 is accepted", () => {
+        const inputs: Inputs = {
+            ...baseInputs,
+            color: 0,
+        }
+        const want = {
+            embeds: [{
+                color: 0,
+                timestamp: expect.any(String),
+                title: 'Success',
+                fields: [
+                    {
+                        name: 'Repository',
+                        value: '[Codertocat/Hello-World](https://githubactions.serverurl.example.com/Codertocat/Hello-World)',
+                        inline: true
+                    },
+                    {
+                        name: 'Ref',
+                        value: 'refs/tags/simple-tag',
+                        inline: true
+                    },
+                    {
+                        name: 'Event - push',
+                        value: 'mocked format event',
+                        inline: false
+                    },
+                    {
+                        name: 'Triggered by',
+                        value: 'Codertocat',
+                        inline: true
+                    },
+                    {
+                        name: 'Workflow',
+                        value: "[push-ci](https://githubactions.serverurl.example.com/Codertocat/Hello-World/actions/runs/123123)",
+                        inline: true
+                    }
+                ]
+            }]
+        }
+        expect(getPayload(inputs)).toStrictEqual(want)
+    })
+
 
     test("username", () => {
         const inputs: Inputs = {
