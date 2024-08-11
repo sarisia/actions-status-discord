@@ -57,7 +57,7 @@ Post GitHub Actions status to Discord as an beautiful embed
     title: "New version of `software` is ready!"
     description: |
       Version `${{ github.event.release.tag_name }}`
-      Click [here]( ${{github.event.repository.html_url }}/releases/tag/${{ github.event.release.tag_name }}) to download!
+      Click [here](${{ github.event.release.html_url }}) to download!
     color: 0xff91a4
 ```
 
