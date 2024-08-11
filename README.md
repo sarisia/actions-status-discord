@@ -51,9 +51,8 @@ Post GitHub Actions status to Discord as an beautiful embed
 ```yaml
 - uses: sarisia/actions-status-discord@v1
   if: always()
-  env:
-    DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
   with:
+    webhook: ${{ secrets.DISCORD_WEBHOOK }}
     nodetail: true
     title: "New version of `software` is ready!
     description: |
