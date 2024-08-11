@@ -15,6 +15,7 @@ export interface Inputs {
     nocontext: boolean
     noprefix: boolean
     notimestamp: boolean
+    ack_no_webhook: boolean
 }
 
 interface StatusOption {
@@ -70,12 +71,13 @@ export function getInputs(): Inputs {
         avatar_url: core.getInput('avatar_url').trim(),
         nocontext: nocontext,
         noprefix: noprefix,
-        notimestamp: stob(core.getInput('notimestamp'))
+        notimestamp: stob(core.getInput('notimestamp')),
+        ack_no_webhook: stob(core.getInput('ack_no_webhook'))
     }
 
     // validate
-    if (!inputs.webhooks.length) {
-        throw new Error("no webhook is given")
+    if (!inputs.webhooks.length && !inputs.ack_no_webhook) {
+        logWarning("No webhook is given. If this is intended, you can suppress this warning by setting `ack_no_webhook` to `true`.")
     }
     if (!(inputs.status in statusOpts)) {
         throw new Error(`invalid status value: ${inputs.status}`)

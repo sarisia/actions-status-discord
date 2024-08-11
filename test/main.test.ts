@@ -44,7 +44,8 @@ describe('getPayload(Inputs)', () => {
         color: undefined,
         url: '',
         username: '',
-        avatar_url: ''
+        avatar_url: '',
+        ack_no_webhook: false
     }
 
     test("default", () => {
