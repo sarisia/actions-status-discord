@@ -31,7 +31,7 @@ describe("getInputs()", () => {
         expect(got.description).toBe('')
         expect(got.title).toBe('github actions')
         expect(got.image).toBe('')
-        expect(got.color).toBeFalsy()
+        expect(got.color).toBe(undefined)
         expect(got.username).toBe('')
         expect(got.avatar_url).toBe('')
     })
@@ -73,6 +73,18 @@ describe("getInputs()", () => {
         const got = getInputs()
         expect(got.nocontext).toBe(true)
         expect(got.noprefix).toBe(true)
+    })
+
+    test("color 0 is accepted", () => {
+        process.env['INPUT_COLOR'] = '0'
+        const got = getInputs()
+        expect(got.color).toBe(0)
+    })
+    
+    test("invalid color is defaulted to undefined", () => {
+        process.env['INPUT_COLOR'] = 'qwertyuiop'
+        const got = getInputs()
+        expect(got.color).toBe(undefined)
     })
 
     test("all (job)", () => {

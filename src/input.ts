@@ -8,7 +8,7 @@ export interface Inputs {
     description: string
     title: string
     image: string
-    color: number
+    color?: number
     url: string
     username: string
     avatar_url: string
@@ -55,6 +55,8 @@ export function getInputs(): Inputs {
     const nocontext = nodetail || stob(core.getInput('nocontext'))
     const noprefix = nodetail || stob(core.getInput('noprefix'))
 
+    const colorParsed = parseInt(core.getInput("color"))
+
     const inputs: Inputs = {
         webhooks: webhooks,
         status: core.getInput('status').trim().toLowerCase(),
@@ -62,7 +64,7 @@ export function getInputs(): Inputs {
         description: core.getInput('description').trim(),
         title: (core.getInput('title') || core.getInput('job')).trim(),
         image: core.getInput('image').trim(),
-        color: parseInt(core.getInput('color')),
+        color: isNaN(colorParsed) ? undefined : colorParsed,
         url: core.getInput('url').trim(),
         username: core.getInput('username').trim(),
         avatar_url: core.getInput('avatar_url').trim(),
