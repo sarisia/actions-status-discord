@@ -55,7 +55,9 @@ Post GitHub Actions status to Discord as an beautiful embed
     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
   with:
     nodetail: true
-    title: "We did it!"
+    title: "App ${{ github.event.release.tag_name }} has been released!"
+    description: |
+      Download it from [here]( ${{github.event.repository.html_url }}/releases/tag/${{ github.event.release.tag_name }})!
     color: 0xff91a4
 ```
 
