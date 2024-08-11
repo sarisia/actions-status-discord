@@ -59,6 +59,10 @@ inputs:
     required: false
     default: "false"
 
+outputs:
+  payload:
+    description: "Discord webhook payload"
+
 runs:
   using: "node20"
   main: "lib/index.js"
