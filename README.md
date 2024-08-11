@@ -130,10 +130,11 @@ Some fields support markdown syntax.
   with:
     webhook: ${{ secrets.DISCORD_WEBHOOK }}
     nodetail: true
-    title: New version of `software` is ready!
+    title: "New version of `software` is ready!"
     description: |
-      Version `1.2.3-alpha`
-      Click [here](https://github.com/sarisia/actions-status-discord) to download!
+      Version `${{ github.event.release.tag_name }}`
+      Click [here]( ${{github.event.repository.html_url }}/releases/tag/${{ github.event.release.tag_name }}) to download!
+    color: 0xff91a4
 ```
 
 ![image](https://user-images.githubusercontent.com/33576079/212482315-52429bbd-b7b9-456a-8ee8-ee26aa2a0fb1.png)
