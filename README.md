@@ -61,7 +61,7 @@ Post GitHub Actions status to Discord as an beautiful embed
     color: 0xff91a4
 ```
 
-![image](https://user-images.githubusercontent.com/33576079/212482315-52429bbd-b7b9-456a-8ee8-ee26aa2a0fb1.png)
+![image](https://github.com/user-attachments/assets/ac102998-6bf4-451b-9803-91ff083ad9b6)
 
 For `if` parameter, see
 [GitHub Actions Reference](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions)
