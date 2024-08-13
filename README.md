@@ -100,6 +100,7 @@ For `if` parameter, see
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
 | nodetail | No | `true` or `false` | `false` | Set `true` will set both `nocontext` and `noprefix` to `true` |
 | notimestamp | No | `true` or `false` | `false` | Set `true` to avoid appending timestamp |
+| ack_no_webhook | No | `true` or `false` | `false` | Set `true` to suppress warnings when no Webhook endpoint is given |
 
 
 <details>
@@ -118,6 +119,14 @@ For `if` parameter, see
 `job` input is deprecated and now removed in v2.
 
 Just change `job` to `title` in your workflow file to make it work. -->
+
+
+### Outputs
+
+| Key | Description |
+| - | - |
+| payload | Discord webhook payload. See [Full payload control](#full-payload-control) |
+
 
 ## Tips
 
@@ -170,6 +179,40 @@ If some of these webhooks are failed, other deliveries will **NOT** be cancelled
 
 If the option `nofail` is set to `false` and any of one fail, the action will set
 workflow status to `Failure`.
+
+### Full payload control
+
+You can modify payload before sending to Discord:
+
+```yaml
+- uses: sarisia/actions-status-discord@v1
+  if: always()
+  id: webhook # set id to reference output payload later
+  with:
+    ack_no_webhook: true # set this to suppress warning
+    # you can omit webhook input (or DISCORD_WEBHOOK environment variable)
+  
+- run: npm install axios
+- uses: actions/github-script@v7
+  env:
+    WEBHOOK_PAYLOAD: ${{ steps.webhook.outputs.payload }}
+    WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+  with:
+    script: |
+      const axios = require("axios")
+
+      const { WEBHOOK_PAYLOAD, WEBHOOK_URL } = process.env
+
+      const payload = JSON.parse(WEBHOOK_PAYLOAD)
+
+      // modify payload as you like
+      delete payload.embeds[0].color
+
+      // send to Discord
+      axios.post(WEBHOOK_URL, payload)
+```
+
+[See actions/github-script docs](https://github.com/actions/github-script)
 
 ### GHES, Gitea and Forgejo
 
