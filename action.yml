@@ -58,6 +58,14 @@ inputs:
     description: "Avoid appending timestamp"
     required: false
     default: "false"
+  ack_no_webhook:
+    description: "Suppress warning when webhook is not set"
+    required: false
+    default: "false"
+
+outputs:
+  payload:
+    description: "Discord webhook payload"
 
 runs:
   using: "node20"

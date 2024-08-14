@@ -16,6 +16,7 @@ describe("getInputs()", () => {
         process.env['INPUT_NOPREFIX'] = 'false'
         process.env['INPUT_NODETAIL'] = 'false'
         process.env['INPUT_NOTIMESTAMP'] = 'false'
+        process.env['INPUT_ACKNOWEBHOOK'] = 'false'
 
         // no defaults in action.yml, but need for passing validation
         process.env['DISCORD_WEBHOOK'] = "https://env.webhook.invalid"
@@ -34,11 +35,7 @@ describe("getInputs()", () => {
         expect(got.color).toBe(undefined)
         expect(got.username).toBe('')
         expect(got.avatar_url).toBe('')
-    })
-
-    test("no webhooks", () => {
-        delete process.env['DISCORD_WEBHOOK']
-        expect(getInputs).toThrow("no webhook is given")
+        expect(got.ack_no_webhook).toBe(false)
     })
 
     test("invalid status", () => {
@@ -130,6 +127,7 @@ describe("getInputs()", () => {
         process.env['INPUT_COLOR'] = '0xffffff'
         process.env['INPUT_USERNAME'] = 'jest test'
         process.env['INPUT_AVATAR_URL'] = '\n\n\nhttps://avatar.webhook.invalid\n'
+        process.env['INPUT_ACK_NO_WEBHOOK'] = 'true'
 
         const got = getInputs()
         expect(got.noprefix).toBe(true)
@@ -146,5 +144,7 @@ describe("getInputs()", () => {
         expect(got.color).toBe(0xffffff)
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
+        expect(got.noprefix).toBe(true)
+        expect(got.ack_no_webhook).toBe(true)
     })
 })

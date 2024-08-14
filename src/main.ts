@@ -1,4 +1,4 @@
-import { endGroup, startGroup } from '@actions/core'
+import { endGroup, startGroup, setOutput } from '@actions/core'
 import * as github from '@actions/github'
 import axios from 'axios'
 import { formatEvent } from './format'
@@ -13,12 +13,16 @@ async function run() {
 
         logInfo('Generating payload...')
         const payload = getPayload(inputs)
-        startGroup('Dump payload')
-        logInfo(JSON.stringify(payload, null, 2))
+        const payloadStr = JSON.stringify(payload, null, 2)
+        startGroup('Dump payload (You can access the payload as `${{ steps.<step_id>.outputs.payload }}` in latter steps)')
+        logInfo(payloadStr)
         endGroup()
 
         logInfo(`Triggering ${inputs.webhooks.length} webhook${inputs.webhooks.length > 1 ? 's' : ''}...`)
         await Promise.all(inputs.webhooks.map(w => wrapWebhook(w.trim(), payload)))
+
+        // set output
+        setOutput('payload', payloadStr)
     } catch (e: any) {
         logError(`Unexpected failure: ${e} (${e.message})`)
     }
