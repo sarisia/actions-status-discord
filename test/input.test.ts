@@ -145,5 +145,6 @@ describe("getInputs()", () => {
         expect(got.username).toBe('jest test')
         expect(got.avatar_url).toBe('https://avatar.webhook.invalid')
         expect(got.noprefix).toBe(true)
+        expect(got.ack_no_webhook).toBe(true)
     })
 })
