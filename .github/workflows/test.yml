@@ -31,7 +31,7 @@ jobs:
             npm run build
 
       - name: report result
-        uses: sarisia/actions-status-discord@448a59224349c2bf9611e68b88787f2b0011965f
+        uses: sarisia/actions-status-discord@ce8cc68e4e626000136b3c702d049a154243e490
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
