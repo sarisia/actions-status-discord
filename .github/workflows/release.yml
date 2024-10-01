@@ -15,7 +15,7 @@ jobs:
       attestations: write
 
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
 
       - uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
         with:
@@ -34,12 +34,12 @@ jobs:
             npm run build
 
       - name: generate artifact attestation for action.yml
-        uses: actions/attest-build-provenance@6149ea5740be74af77f260b9db67e633f6b0a9a1
+        uses: actions/attest-build-provenance@1c608d11d69870c2092266b3f9a6f3abbf17002c
         with:
           subject-path: action.yml
 
       - name: generate artifact attestation for lib/index.js
-        uses: actions/attest-build-provenance@6149ea5740be74af77f260b9db67e633f6b0a9a1
+        uses: actions/attest-build-provenance@1c608d11d69870c2092266b3f9a6f3abbf17002c
         with:
           subject-path: lib/index.js
 
@@ -63,7 +63,7 @@ jobs:
           git push origin $TAGNAME
 
       - name: report result
-        uses: sarisia/actions-status-discord@ce8cc68e4e626000136b3c702d049a154243e490
+        uses: sarisia/actions-status-discord@33dfe58bd6a779c49926a82a2c008bab1ca733ee
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -89,7 +89,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938
         with:
           ref: ${{ github.ref_name }}
 
@@ -119,7 +119,7 @@ jobs:
       - uses: sarisia/actions/conclusion@main
         id: ghapi
 
-      - uses: sarisia/actions-status-discord@ce8cc68e4e626000136b3c702d049a154243e490
+      - uses: sarisia/actions-status-discord@33dfe58bd6a779c49926a82a2c008bab1ca733ee
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
