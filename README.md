@@ -4,14 +4,9 @@ Post GitHub Actions status to Discord as an beautiful embed
 
 ![image](https://user-images.githubusercontent.com/33576079/212482263-31456af9-6a9f-4110-82ad-cd3df738bddb.png)
 
-- :sushi: **_Super Easy!_** Works perfectly out of the box.
-- :sushi: **_OS & Arch-agnostic!_** Supports Linux (Ubuntu), macOS (Intel, M1) and Windows runners.
-- :sushi: **_Fast!_** Faster than ones written as Docker container action.
-
----
-
-> :warning: If you're reading this document in master branch,
-> please refer to the [latest released document here](https://github.com/marketplace/actions/actions-status-discord). 
+- :sushi: **_Super Easy!_** Works perfectly out of the box, also super customizable!
+- :sushi: **_OS & Arch-agnostic!_** Tested against all GitHub-hosted runners including Ubuntu ARM and macOS Apple Silicon. [Check out test workflow](https://github.com/sarisia/actions-status-discord/actions/workflows/release.yml)
+- :sushi: **_Fast!_** JavaScript action! Faster than ones written as Docker container action
 
 ## Usage
 
