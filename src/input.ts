@@ -77,7 +77,7 @@ export function getInputs(): Inputs {
 
     // validate
     if (!inputs.webhooks.length && !inputs.ack_no_webhook) {
-        logWarning("No webhook is given. If this is intended, you can suppress this warning by setting `ack_no_webhook` to `true`.")
+        throw new Error("No webhook is given. If this is intended, you can suppress this error by setting `ack_no_webhook` to `true`.")
     }
     if (!(inputs.status in statusOpts)) {
         throw new Error(`invalid status value: ${inputs.status}`)
