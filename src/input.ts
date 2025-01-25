@@ -63,7 +63,7 @@ export function getInputs(): Inputs {
         status: core.getInput('status').trim().toLowerCase(),
         content: core.getInput('content').trim(),
         description: core.getInput('description').trim(),
-        title: (core.getInput('title') || core.getInput('job')).trim(),
+        title: (core.getInput('job') || core.getInput('title')).trim(),
         image: core.getInput('image').trim(),
         color: isNaN(colorParsed) ? undefined : colorParsed,
         url: core.getInput('url').trim(),
