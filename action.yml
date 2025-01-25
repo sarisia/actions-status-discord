@@ -59,7 +59,7 @@ inputs:
     required: false
     default: "false"
   ack_no_webhook:
-    description: "Suppress warning when webhook is not set"
+    description: "Suppress error which raised when webhook is not set"
     required: false
     default: "false"
 

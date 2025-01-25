@@ -95,7 +95,7 @@ For `if` parameter, see
 | noprefix | No | `true` or `false` | `false` | Set `true` to avoid appending job status (`Success: `, etc.) to title |
 | nodetail | No | `true` or `false` | `false` | Set `true` will set both `nocontext` and `noprefix` to `true` |
 | notimestamp | No | `true` or `false` | `false` | Set `true` to avoid appending timestamp |
-| ack_no_webhook | No | `true` or `false` | `false` | Set `true` to suppress warnings when no Webhook endpoint is given |
+| ack_no_webhook | No | `true` or `false` | `false` | Set `true` to suppress error which raised when webhook is not set |
 
 
 <details>
@@ -184,8 +184,9 @@ You can modify payload before sending to Discord:
   if: always()
   id: webhook # set id to reference output payload later
   with:
-    ack_no_webhook: true # set this to suppress warning
-    # you can omit webhook input (or DISCORD_WEBHOOK environment variable)
+    nofail: false
+    ack_no_webhook: true # set this to suppress error which is raised when nofail is disabled and webhook is not set
+    # webhook is not set here!
   
 - run: npm install axios
 - uses: actions/github-script@v7
