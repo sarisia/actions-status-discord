@@ -78,7 +78,7 @@ For `if` parameter, see
 | webhook | No | String | `env.DISCORD_WEBHOOK` | Discord webhook endpoind like:<br>`https://discordapp.com/api/webhooks/...`<br>This overrides `env.DISCORD_WEBHOOK`.<br>**DO NOT APPEND [`/github` SUFFIX](https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook)!** |
 | status | No | `Success`, `Failure` or `Cancelled` | `${{ job.status }}` | See [Document for `job` context](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-context) |
 | content | No | String | | Content. Shown as an message outside of the embed. See [Mention to user/role](#mention-to-user/role) |
-| title | No | String | `${{ github.workflow}}` | String included in embed title. Overrides `job` input. |
+| title | No | String | `${{ github.workflow}}` | String included in embed title. |
 | description | No | String | | Description included in message |
 | image | No | String | | Image attached to the message |
 | color | No | Hex string like: `0xFFFFFF` | | Overrides Discord embed color |
@@ -103,7 +103,7 @@ For `if` parameter, see
 
 | Key | Required | Value | Default | Description |
 | - | - | - | - | - |
-| job | No | String | | **Deprecated. Will be removed in v2**<br>Job name included in message title. Same as `title` input. |
+| job | No | String | | **Deprecated. Will be removed in v2**<br>Job name included in message title. Overrides `title` input. |
 
 </details>
 
