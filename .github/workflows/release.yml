@@ -34,12 +34,12 @@ jobs:
             npm run build
 
       - name: generate artifact attestation for action.yml
-        uses: actions/attest-build-provenance@ef244123eb79f2f7a7e75d99086184180e6d0018
+        uses: actions/attest-build-provenance@520d128f165991a6c774bcb264f323e3d70747f4
         with:
           subject-path: action.yml
 
       - name: generate artifact attestation for lib/index.js
-        uses: actions/attest-build-provenance@ef244123eb79f2f7a7e75d99086184180e6d0018
+        uses: actions/attest-build-provenance@520d128f165991a6c774bcb264f323e3d70747f4
         with:
           subject-path: lib/index.js
 
@@ -63,7 +63,7 @@ jobs:
           git push origin $TAGNAME
 
       - name: report result
-        uses: sarisia/actions-status-discord@33dfe58bd6a779c49926a82a2c008bab1ca733ee
+        uses: sarisia/actions-status-discord@5ddd3b114a98457dd80a39b2f00b6a998cd69008
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -122,7 +122,7 @@ jobs:
       - uses: sarisia/actions/conclusion@main
         id: ghapi
 
-      - uses: sarisia/actions-status-discord@33dfe58bd6a779c49926a82a2c008bab1ca733ee
+      - uses: sarisia/actions-status-discord@5ddd3b114a98457dd80a39b2f00b6a998cd69008
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
