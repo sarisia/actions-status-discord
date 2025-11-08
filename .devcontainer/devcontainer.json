@@ -7,7 +7,6 @@
 
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	"features": {
-		"ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
