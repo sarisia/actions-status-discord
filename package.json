@@ -12,16 +12,16 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@vercel/ncc": "^0.38.3",
-    "jest": "^30.0.5",
-    "npm-check-updates": "^18.0.2",
-    "ts-jest": "^29.4.1",
-    "typescript": "^5.9.2"
+    "@vercel/ncc": "^0.38.4",
+    "jest": "^30.2.0",
+    "npm-check-updates": "^19.1.2",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.1",
-    "@types/node": "^24.3.0",
-    "axios": "^1.11.0"
+    "@types/node": "^24.10.0",
+    "axios": "^1.13.2"
   }
 }
