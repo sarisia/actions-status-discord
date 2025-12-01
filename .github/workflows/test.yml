@@ -11,7 +11,7 @@ jobs:
       packages: read
       contents: read
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
       
       - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef
         with:
@@ -31,7 +31,7 @@ jobs:
             npm run build
 
       - name: report result
-        uses: sarisia/actions-status-discord@11a0bfe3b50977e38aa2bd4a4ebd296415e83c19
+        uses: sarisia/actions-status-discord@b8381b25576cb341b2af39926ab42c5056cc44ed
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
