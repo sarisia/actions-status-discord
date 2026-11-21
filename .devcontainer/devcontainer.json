@@ -1,9 +1,12 @@
 {
 	"name": "Node.js",
 
-	"build": {
-		"dockerfile": "Dockerfile",
-	},
+	// "build": {
+	// 	"dockerfile": "Dockerfile",
+	// },
+	"dockerComposeFile": "compose.yaml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspace",
 
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	"features": {
