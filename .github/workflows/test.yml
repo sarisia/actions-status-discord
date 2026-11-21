@@ -23,7 +23,7 @@ jobs:
         uses: devcontainers/ci@8bf61b26e9c3a98f69cb6ce2f88d24ff59b785c6
         env:
           # workaround for https://github.com/devcontainers/cli/issues/1320
-          COMPOSE_BAKE: "false"
+          BUILDX_BAKE_ENTITLEMENTS_FS: "0"
         with:
           imageName: ghcr.io/${{ github.repository }}/devcontainer
           cacheFrom: ghcr.io/${{ github.repository }}/devcontainer
