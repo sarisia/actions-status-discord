@@ -1,8 +1,0 @@
-services:
-  devcontainer:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    volumes:
-      - ..:/workspace
-    command: sleep infinity
