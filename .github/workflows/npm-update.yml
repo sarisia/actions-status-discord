@@ -13,16 +13,16 @@ jobs:
       packages: read
       actions: write
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
-      - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef
+      - uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
       - name: update
-        uses: devcontainers/ci@8bf61b26e9c3a98f69cb6ce2f88d24ff59b785c6
+        uses: devcontainers/ci@513af61f4de4f75d37e4438f184ba4358f0fc1ca
         env:
           # workaround for https://github.com/devcontainers/cli/issues/1320
           BUILDX_BAKE_ENTITLEMENTS_FS: "0"
