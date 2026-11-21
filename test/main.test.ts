@@ -1,13 +1,13 @@
-import { formatEvent } from '../src/format'
+import { jest } from '@jest/globals'
 import { Inputs } from '../src/input'
-import { getPayload } from '../src/main'
+import push_tag from './payload/push_tag.json' with { type: 'json' }
 
 // see https://github.com/actions/toolkit/blob/457303960f03375db6f033e214b9f90d79c3fe5c/packages/github/src/context.ts
 // and https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
-jest.mock('@actions/github', () => {
+jest.unstable_mockModule('@actions/github', () => {
     return {
         context: {
-            payload: require('./payload/push_tag.json'),
+            payload: push_tag,
 
             eventName: 'push',
             sha: '6113728f27ae82c7b1a177c8d03f9e96e0adf246',
@@ -26,9 +26,12 @@ jest.mock('@actions/github', () => {
     }
 })
 
-jest.mock('../src/format')
-const mockedFormatEvent = formatEvent as jest.Mock
-mockedFormatEvent.mockReturnValue("mocked format event")
+jest.unstable_mockModule('../src/format', () => ({
+    formatEvent: jest.fn().mockReturnValue("mocked format event")
+}))
+
+// mocks must be registered before importing modules that depend on them
+const { getPayload } = await import('../src/main')
 
 describe('getPayload(Inputs)', () => {
     const baseInputs: Inputs = {

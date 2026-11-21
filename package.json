@@ -4,13 +4,14 @@
   "description": "Post Github Actions CI status to Discord",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest --verbose --ci",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --verbose --ci",
     "build": "ncc build -o lib --minify src/main.ts",
     "deps": "ncu --doctor -u"
   },
   "author": "Sarisia",
   "license": "MIT",
   "devDependencies": {
+    "@jest/globals": "^30.5.2",
     "@types/jest": "^30.0.0",
     "@vercel/ncc": "^0.38.4",
     "jest": "^30.2.0",

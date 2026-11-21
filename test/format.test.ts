@@ -1,11 +1,11 @@
 import { formatEvent } from '../src/format'
-import pull_request from './payload/pull_request.json'
-import push_branch from './payload/push_branch.json'
-import push_tag from './payload/push_tag.json'
-import release from './payload/release/release.json'
-import release_nobody from './payload/release/release_nobody.json'
-import release_noname from './payload/release/release_noname.json'
-import release_noname_nobody from './payload/release/release_noname_nobody.json'
+import pull_request from './payload/pull_request.json' with { type: 'json' }
+import push_branch from './payload/push_branch.json' with { type: 'json' }
+import push_tag from './payload/push_tag.json' with { type: 'json' }
+import release from './payload/release/release.json' with { type: 'json' }
+import release_nobody from './payload/release/release_nobody.json' with { type: 'json' }
+import release_noname from './payload/release/release_noname.json' with { type: 'json' }
+import release_noname_nobody from './payload/release/release_noname_nobody.json' with { type: 'json' }
 
 describe('formatEvent(event, payload)', () => {
     test('no formatter', () => {
