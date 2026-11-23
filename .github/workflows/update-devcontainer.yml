@@ -13,9 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-    steps:
-      - uses: sarisia/actions/update-devcontainer@main
+    uses: sarisia/workflows/.github/workflows/update-devcontainer.yml@main
